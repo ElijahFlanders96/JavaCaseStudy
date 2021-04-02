@@ -141,6 +141,9 @@ public class HomeController {
 	}
 	
 	
+	
+	
+	
 	//STORE METHODS
 		@PostMapping("/addStore")
 		public String addNewStore(@ModelAttribute("store") Store store, Model model, BindingResult result) {
@@ -185,6 +188,9 @@ public class HomeController {
 			model.addAttribute("removeStoreSuccess", "Store removed from database sucessfully!");
 			return "stores";
 		}
+		
+		
+		
 		
 		
 		//VEHICLE METHODS
@@ -232,5 +238,53 @@ public class HomeController {
 			carService.removeCarService(dId);
 			model.addAttribute("removeCarSuccess", "Vehicle removed from database sucessfully!");
 			return "vehicles";
+		}
+		
+		
+		
+		//EQUIPMENT METHODS
+		@PostMapping("/addMac")
+		public String addNewMac(@ModelAttribute("machinery") Machinery mac, Model model, BindingResult result) {
+			if (result.hasErrors()) {
+				model.addAttribute("addMacError", "There was an error with an input field, please try again");
+				return "equipment";
+			}
+			macService.addMacService(mac);
+			model.addAttribute("addMacSuccess", "Equipment added to the database successfully!");
+			System.out.println("added to db successfully");
+			return "equipment";
+		}
+		
+		@PostMapping("/getMac")
+		public String getMac(@ModelAttribute("machinery") Machinery mac, @RequestParam("getmId") int mId, Model model) {
+			mac = macService.getMacService(mId);
+			if (mac==null) {
+				model.addAttribute("getMacError", "Please enter the ID of existing equipment");
+			}
+			model.addAttribute("mId", mac.getmId() + ", ");
+			model.addAttribute("name", mac.getName() + ", ");
+			model.addAttribute("status", mac.getStatus() + ", ");
+			model.addAttribute("replacementCost", mac.getReplacementCost() + ", ");
+			model.addAttribute("storeId", mac.getStoreId() + ", ");
+			return "equipment";
+		}
+		
+		@PostMapping("/updateMac")
+		public String updateMac(@ModelAttribute("machinery") Machinery mac, Model model, BindingResult result) {
+			if (result.hasErrors()) {
+				model.addAttribute("updateMacError", "There was an error with an input field, please try again");
+				return "equipment";
+			}
+			macService.updateMacService(mac);
+			model.addAttribute("updateMacSuccess", "Equipment updated successfully!");
+			System.out.println("updated successfully");
+			return "equipment";
+		}
+		
+		@PostMapping("/removeMac")
+		public String removeMac(@ModelAttribute("machinery") Machinery mac, @RequestParam("mId") int mId, Model model) {
+			macService.removeMacService(mId);
+			model.addAttribute("removeMacSuccess", "Equipment removed from database sucessfully!");
+			return "equipment";
 		}
 }

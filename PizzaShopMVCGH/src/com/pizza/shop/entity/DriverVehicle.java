@@ -42,6 +42,10 @@ public class DriverVehicle {
 		return dId;
 	}
 
+	public void setdId(int dId) {
+		this.dId = dId;
+	}
+
 	public String getModel() {
 		return model;
 	}

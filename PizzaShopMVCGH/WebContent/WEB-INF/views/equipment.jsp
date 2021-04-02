@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,21 +14,121 @@
 <body>
 	<%@ include file="navbar.html" %>
 	<div class="main-body">
-    <div>
-      <input type="submit" value="Add New Equipment" class="crud-btn"/>
-    </div>
-    <br>
-    <div>
-      <input type="submit" value="View Equipment's Info" class="crud-btn"/>
-    </div>
-    <br>
-    <div>
-      <input type="submit" value="Update Equipment's Info" class="crud-btn"/>
-    </div>
-    <br>
-    <div>
-      <input type="submit" value="Remove Equipment" class="crud-btn"/>
-    </div>
-  </div>
+	<!-- ADD -->
+		<form:form action="./addMac" method="post" modelAttribute="machinery">
+			<div class="main-body-text">
+				<h3>Add New Equipment</h3>
+				<label>ID: </label>
+				<br>
+				<form:input path="mId"/>
+				<form:errors path="mId"/>
+			</div>
+			<div class="main-body-text">
+				<label>Equipment Name: </label>
+				<br>
+				<form:input path="name"/>
+				<form:errors path="name"/>
+			</div>
+			<div class="main-body-text">
+				<label>Status: </label>
+				<br>
+				<form:input path="status"/>
+				<form:errors path="status"/>
+			</div>
+			<div class="main-body-text">
+				<label>Replacement Cost: </label>
+				<br>
+				<form:input path="replacementCost"/>
+				<form:errors path="replacementCost"/>
+			</div>
+			<br>
+			<div class="main-body-text">
+				<label>Store ID: </label>
+				<br>
+				<form:input path="storeId"/>
+				<form:errors path="storeId"/>
+			</div>
+			<br>
+			<div>
+		      <input type="submit" value="Add Equipment" class="crud-btn"/>
+		    </div>
+		   	<h3 class="main-body-text">${addMacError}</h3>
+		   	<h3 class="main-body-text">${addMacSuccess}</h3>
+		</form:form>
+    	<br>
+    	<!-- GET -->
+    	<form action="./getMac" method="post">
+	    	<div class="main-body-text">
+	    		<h3>Get Equipment by ID to View Info</h3>
+	    		<label>ID: </label>
+	    		<br>
+	    		<input type="text" name="getmId"/>
+	    	</div>
+	    	<br>
+    		<div>
+		      <input type="submit" value="Get Equipment" class="crud-btn"/>
+		    </div>
+		    <br>
+		    <h3 class="main-body-text">${getMacError}</h3>
+		    <h5 class="main-body-text">${mId}${name}${status}${replacementCost}${storeId}</h5>
+    	</form>
+	    <br>
+	    <!-- UPDATE -->
+	    <form:form action="./updateMac" method="post" modelAttribute="machinery">
+			<div class="main-body-text">
+				<h3>Update Existing Equipment</h3>
+				<label>ID: </label>
+				<br>
+				<form:input path="mId"/>
+				<form:errors path="mId"/>
+			</div>
+			<div class="main-body-text">
+				<label>Equipment Name: </label>
+				<br>
+				<form:input path="name"/>
+				<form:errors path="name"/>
+			</div>
+			<div class="main-body-text">
+				<label>Status: </label>
+				<br>
+				<form:input path="status"/>
+				<form:errors path="status"/>
+			</div>
+			<div class="main-body-text">
+				<label>Replacement Cost: </label>
+				<br>
+				<form:input path="replacementCost"/>
+				<form:errors path="replacementCost"/>
+			</div>
+			<br>
+			<div class="main-body-text">
+				<label>Store ID: </label>
+				<br>
+				<form:input path="storeId"/>
+				<form:errors path="storeId"/>
+			</div>
+			<br>
+			<div>
+		      <input type="submit" value="Update Equipment" class="crud-btn"/>
+		    </div>
+		   	<h3 class="main-body-text">${updateMacError}</h3>
+		   	<h3 class="main-body-text">${updateMacSuccess}</h3>
+		</form:form>
+	    <br>
+	    <!-- REMOVE -->
+	    <form action="./removeMac" method="post">
+	    	<div class="main-body-text">
+	    		<h3>Remove Equipment by ID</h3>
+	    		<label>ID: </label>
+	    		<br>
+	    		<input type="text" name="mId"/>
+	    	</div>
+	    	<br>
+	    	<div>
+		      <input type="submit" value="Remove Equipment" class="crud-btn"/>
+		    </div>
+		    <h3 class="main-body-text">${removeMacSuccess}</h3>
+	    </form>
+  	</div>
 </body>
 </html>

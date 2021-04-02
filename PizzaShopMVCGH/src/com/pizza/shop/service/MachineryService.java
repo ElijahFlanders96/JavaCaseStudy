@@ -24,6 +24,9 @@ public class MachineryService {
 	public Machinery getMacService(int mId) {
 		return macD.getMac(mId);
 	}
+	public void updateMacService(Machinery mac) {
+		macD.updateMac(mac);
+	}
 	public List<Machinery> getAllMacService() {
 		return macD.getAllMac();
 	}
