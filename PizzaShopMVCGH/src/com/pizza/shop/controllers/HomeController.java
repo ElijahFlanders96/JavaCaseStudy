@@ -75,6 +75,11 @@ public class HomeController {
 		return "login";
 	}
 	
+	@GetMapping("/logout")
+	public String showLogoutPage() {
+		return "logout";
+	}
+	
 	
 	
 	
@@ -91,6 +96,18 @@ public class HomeController {
 		return "login";
 	}
 	
+	@PostMapping("/logout")
+	public String processLogoutRequest(Model model, HttpSession session) {
+		Object loggedIn = session.getAttribute("currentUser");
+		if (loggedIn!=null) {
+			session.removeAttribute("currentUser");
+		} else {
+			model.addAttribute("logoutError", "Nobody is logged in!");
+			return "logout";
+		}
+		return "login";
+	}
+	
 	
 	
 	
@@ -98,22 +115,32 @@ public class HomeController {
 	
 	//EMP METHODS
 	@PostMapping("/addEmp")
-	public String addNewEmployee(@ModelAttribute("employee") Employee emp, Model model, BindingResult result) {
+	public String addNewEmployee(@ModelAttribute("employee") Employee emp, Model model, BindingResult result, HttpSession session) {
+		Object loggedIn = session.getAttribute("currentUser");
 		if (result.hasErrors()) {
 			model.addAttribute("errorMessage", "There was an error with an input field, please try again");
 			return "employees";
+		} else if (loggedIn==null) {
+			model.addAttribute("addEmpSessionError", "You must be logged in to add an employee to the database");
+			return "employees";
+		} else {
+			empService.addEmpService(emp);
+			model.addAttribute("successMessage", "Employee added to the database successfully!");
+			System.out.println("added to db successfully");
 		}
-		empService.addEmpService(emp);
-		model.addAttribute("successMessage", "Employee added to the database successfully!");
-		System.out.println("added to db successfully");
 		return "employees";
 	}
 	
 	@PostMapping("/getEmp")
-	public String getEmployee(@ModelAttribute("employee") Employee emp, @RequestParam("geteId") int eId, Model model) {
+	public String getEmployee(@ModelAttribute("employee") Employee emp, @RequestParam("eId") int eId, Model model, HttpSession session) {
+		Object loggedIn = session.getAttribute("currentUser");
 		emp = empService.getEmpService(eId);
 		if (emp==null) {
 			model.addAttribute("getEmpError", "Please enter the ID of an existing employee");
+			return "employees";
+		} else if (loggedIn==null) {
+			model.addAttribute("getEmpSessionError", "You must be logged in to view an employee in the database");
+			return "employees";
 		} else {
 			System.out.println(emp.getFirstName());
 			model.addAttribute("eId", emp.geteId() + ", ");
@@ -129,21 +156,30 @@ public class HomeController {
 	}
 	
 	@PostMapping("/updateEmp")
-	public String updateEmployee(@ModelAttribute("employee") Employee emp, Model model, BindingResult result) {
+	public String updateEmployee(@ModelAttribute("employee") Employee emp, Model model, BindingResult result, HttpSession session) {
+		Object loggedIn = session.getAttribute("currentUser");
 		if (result.hasErrors()) {
 			model.addAttribute("updateEmpError", "There was an error with an input field, please try again");
 			return "employees";
+		} else if (loggedIn==null) {
+			model.addAttribute("updateEmpSessionError", "You must be logged in to update an employee in the database");
+			return "employees";
+		} else {
+			empService.updateEmpService(emp);
+			model.addAttribute("updateEmpSuccess", "Employee updated successfully!");
+			System.out.println("updated successfully");
 		}
-		empService.updateEmpService(emp);
-		model.addAttribute("updateEmpSuccess", "Employee updated successfully!");
-		System.out.println("updated successfully");
 		return "employees";
 	}
 	
 	@PostMapping("/removeEmp")
-	public String removeEmployee(@ModelAttribute("employee") Employee emp, @RequestParam("eId") int eId, Model model) {
+	public String removeEmployee(@ModelAttribute("employee") Employee emp, @RequestParam("eId") int eId, Model model, HttpSession session) {
+		Object loggedIn = session.getAttribute("currentUser");
 		if (empService.getEmpService(eId)==null) {
 			model.addAttribute("removeEmpError", "Please enter the ID of an existing employee");
+		} else if (loggedIn==null) {
+			model.addAttribute("removeEmpSessionError", "You must be logged in to remove an employee from the database");
+			return "employees";
 		} else {
 			empService.removeEmpService(eId);
 			model.addAttribute("removeEmpSuccess", "Employee removed from database sucessfully!");
@@ -159,22 +195,31 @@ public class HomeController {
 	
 	//STORE METHODS
 		@PostMapping("/addStore")
-		public String addNewStore(@ModelAttribute("store") Store store, Model model, BindingResult result) {
+		public String addNewStore(@ModelAttribute("store") Store store, Model model, BindingResult result, HttpSession session) {
+			Object loggedIn = session.getAttribute("currentUser");
 			if (result.hasErrors()) {
 				model.addAttribute("addStoreError", "There was an error with an input field, please try again");
 				return "stores";
+			} else if (loggedIn==null) {
+				model.addAttribute("addStoreSessionError", "You must be logged in to add a store to the database");
+				return "stores";
+			} else {
+				storeService.addStoreService(store);
+				model.addAttribute("addStoreSuccess", "Store added to the database successfully!");
+				System.out.println("added to db successfully");
 			}
-			storeService.addStoreService(store);
-			model.addAttribute("addStoreSuccess", "Store added to the database successfully!");
-			System.out.println("added to db successfully");
 			return "stores";
 		}
 		
 		@PostMapping("/getStore")
-		public String getStore(@ModelAttribute("store") Store store, @RequestParam("getsId") int sId, Model model) {
+		public String getStore(@ModelAttribute("store") Store store, @RequestParam("sId") int sId, Model model, HttpSession session) {
+			Object loggedIn = session.getAttribute("currentUser");
 			store = storeService.getStoreService(sId);
 			if (store==null) {
 				model.addAttribute("getStoreError", "Please enter the ID of an existing store");
+			} else if (loggedIn==null) {
+				model.addAttribute("getStoreSessionError", "You must be logged in to view a store in the database");
+				return "stores";
 			} else {
 				model.addAttribute("sId", store.getsId() + ", ");
 				model.addAttribute("name", store.getName() + ", ");
@@ -185,21 +230,30 @@ public class HomeController {
 		}
 		
 		@PostMapping("/updateStore")
-		public String updateStore(@ModelAttribute("store") Store store, Model model, BindingResult result) {
+		public String updateStore(@ModelAttribute("store") Store store, Model model, BindingResult result, HttpSession session) {
+			Object loggedIn = session.getAttribute("currentUser");
 			if (result.hasErrors()) {
 				model.addAttribute("updateStoreError", "There was an error with an input field, please try again");
 				return "stores";
+			} else if (loggedIn==null) {
+				model.addAttribute("updateStoreSessionError", "You must be logged in to update a store in the database");
+				return "stores";
+			} else {
+				storeService.updateStoreService(store);
+				model.addAttribute("updateStoreSuccess", "Store updated successfully!");
+				System.out.println("updated successfully");
 			}
-			storeService.updateStoreService(store);
-			model.addAttribute("updateStoreSuccess", "Store updated successfully!");
-			System.out.println("updated successfully");
 			return "stores";
 		}
 		
 		@PostMapping("/removeStore")
-		public String removeStore(@ModelAttribute("store") Store store, @RequestParam("sId") int sId, Model model) {
+		public String removeStore(@ModelAttribute("store") Store store, @RequestParam("sId") int sId, Model model, HttpSession session) {
+			Object loggedIn = session.getAttribute("currentUser");
 			if (storeService.getStoreService(sId)==null) {
 				model.addAttribute("removeStoreError", "Please enter the ID of an existing store");
+			} else if (loggedIn==null) {
+				model.addAttribute("removeStoreSessionError", "You must be logged in to remove a store from the database");
+				return "stores";
 			} else {
 				storeService.removeStoreService(sId);
 				model.addAttribute("removeStoreSuccess", "Store removed from database sucessfully!");
@@ -214,9 +268,13 @@ public class HomeController {
 		
 		//VEHICLE METHODS
 		@PostMapping("/addCar")
-		public String addNewCar(@ModelAttribute("driverVehicle") DriverVehicle car, Model model, BindingResult result) {
+		public String addNewCar(@ModelAttribute("driverVehicle") DriverVehicle car, Model model, BindingResult result, HttpSession session) {
+			Object loggedIn = session.getAttribute("currentUser");
 			if (result.hasErrors()) {
 				model.addAttribute("addCarError", "There was an error with an input field, please try again");
+				return "vehicles";
+			} else if (loggedIn==null) {
+				model.addAttribute("addCarSessionError", "You must be logged in to add a vehicle to the database");
 				return "vehicles";
 			}
 			carService.addCarService(car);
@@ -226,10 +284,14 @@ public class HomeController {
 		}
 		
 		@PostMapping("/getCar")
-		public String getCar(@ModelAttribute("driverVehicle") DriverVehicle car, @RequestParam("getdId") int dId, Model model) {
+		public String getCar(@ModelAttribute("driverVehicle") DriverVehicle car, @RequestParam("dId") int dId, Model model, HttpSession session) {
+			Object loggedIn = session.getAttribute("currentUser");
 			car = carService.getCarService(dId);
 			if (car==null) {
 				model.addAttribute("getCarError", "Please enter the ID of an existing vehicle");
+			} else if (loggedIn==null) {
+				model.addAttribute("getCarSessionError", "You must be logged in to view a vehicle in the database");
+				return "vehicles";
 			} else {
 				model.addAttribute("dId", car.getdId() + ", ");
 				model.addAttribute("model", car.getModel() + ", ");
@@ -242,21 +304,30 @@ public class HomeController {
 		}
 		
 		@PostMapping("/updateCar")
-		public String updateCar(@ModelAttribute("driverVehicle") DriverVehicle car, Model model, BindingResult result) {
+		public String updateCar(@ModelAttribute("driverVehicle") DriverVehicle car, Model model, BindingResult result, HttpSession session) {
+			Object loggedIn = session.getAttribute("currentUser");
 			if (result.hasErrors()) {
 				model.addAttribute("updateCarError", "There was an error with an input field, please try again");
 				return "vehicles";
+			} else if (loggedIn==null) {
+				model.addAttribute("updateCarSessionError", "You must be logged in to update a vehicle in the database");
+				return "vehicles";
+			} else {
+				carService.updateCarService(car);
+				model.addAttribute("updateCarSuccess", "Vehicle updated successfully!");
+				System.out.println("updated successfully");
 			}
-			carService.updateCarService(car);
-			model.addAttribute("updateCarSuccess", "Vehicle updated successfully!");
-			System.out.println("updated successfully");
 			return "vehicles";
 		}
 		
 		@PostMapping("/removeCar")
-		public String removeCar(@ModelAttribute("driverVehicle") DriverVehicle car, @RequestParam("dId") int dId, Model model) {
+		public String removeCar(@ModelAttribute("driverVehicle") DriverVehicle car, @RequestParam("dId") int dId, Model model, HttpSession session) {
+			Object loggedIn = session.getAttribute("currentUser");
 			if (carService.getCarService(dId)==null) {
 				model.addAttribute("RemoveCarError", "Please enter ID of an existing vehicle");
+			} else if (loggedIn==null) {
+				model.addAttribute("removeCarSessionError", "You must be logged in to remove a vehicle in the database");
+				return "vehicles";
 			} else {
 				carService.removeCarService(dId);
 				model.addAttribute("removeCarSuccess", "Vehicle removed from database sucessfully!");
@@ -272,22 +343,31 @@ public class HomeController {
 		
 		//EQUIPMENT METHODS
 		@PostMapping("/addMac")
-		public String addNewMac(@ModelAttribute("machinery") Machinery mac, Model model, BindingResult result) {
+		public String addNewMac(@ModelAttribute("machinery") Machinery mac, Model model, BindingResult result, HttpSession session) {
+			Object loggedIn = session.getAttribute("currentUser");
 			if (result.hasErrors()) {
 				model.addAttribute("addMacError", "There was an error with an input field, please try again");
 				return "equipment";
+			} else if (loggedIn==null) {
+				model.addAttribute("addMacSessionError", "You must be logged in to add equipment to the database");
+				return "equipment";
+			} else {
+				macService.addMacService(mac);
+				model.addAttribute("addMacSuccess", "Equipment added to the database successfully!");
+				System.out.println("added to db successfully");
 			}
-			macService.addMacService(mac);
-			model.addAttribute("addMacSuccess", "Equipment added to the database successfully!");
-			System.out.println("added to db successfully");
 			return "equipment";
 		}
 		
 		@PostMapping("/getMac")
-		public String getMac(@ModelAttribute("machinery") Machinery mac, @RequestParam("getmId") int mId, Model model) {
+		public String getMac(@ModelAttribute("machinery") Machinery mac, @RequestParam("mId") int mId, Model model, HttpSession session) {
+			Object loggedIn = session.getAttribute("currentUser");
 			mac = macService.getMacService(mId);
 			if (mac==null) {
 				model.addAttribute("getMacError", "Please enter the ID of existing equipment");
+			} else if (loggedIn==null) {
+				model.addAttribute("getMacSessionError", "You must be logged in to view equipment in the database");
+				return "equipment";
 			} else {
 				model.addAttribute("mId", mac.getmId() + ", ");
 				model.addAttribute("name", mac.getName() + ", ");
@@ -299,21 +379,30 @@ public class HomeController {
 		}
 		
 		@PostMapping("/updateMac")
-		public String updateMac(@ModelAttribute("machinery") Machinery mac, Model model, BindingResult result) {
+		public String updateMac(@ModelAttribute("machinery") Machinery mac, Model model, BindingResult result, HttpSession session) {
+			Object loggedIn = session.getAttribute("currentUser");
 			if (result.hasErrors()) {
 				model.addAttribute("updateMacError", "There was an error with an input field, please try again");
 				return "equipment";
+			} else if (loggedIn==null) {
+				model.addAttribute("updateMacSessionError", "You must be logged in to update equipment in the database");
+				return "equipment";
+			} else {
+				macService.updateMacService(mac);
+				model.addAttribute("updateMacSuccess", "Equipment updated successfully!");
+				System.out.println("updated successfully");
 			}
-			macService.updateMacService(mac);
-			model.addAttribute("updateMacSuccess", "Equipment updated successfully!");
-			System.out.println("updated successfully");
 			return "equipment";
 		}
 		
 		@PostMapping("/removeMac")
-		public String removeMac(@ModelAttribute("machinery") Machinery mac, @RequestParam("mId") int mId, Model model) {
+		public String removeMac(@ModelAttribute("machinery") Machinery mac, @RequestParam("mId") int mId, Model model, HttpSession session) {
+			Object loggedIn = session.getAttribute("currentUser");
 			if (macService.getMacService(mId)==null) {
 				model.addAttribute("removeMacError", "Please enter the ID of existing equipment");
+			} else if (loggedIn==null) {
+				model.addAttribute("removeMacSessionError", "You must be logged in to remove equipment from the database");
+				return "equipment";
 			} else {
 				macService.removeMacService(mId);
 				model.addAttribute("removeMacSuccess", "Equipment removed from database sucessfully!");

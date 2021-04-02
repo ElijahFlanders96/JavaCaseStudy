@@ -45,26 +45,28 @@
 			<div>
 		      <input type="submit" value="Add Store" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${addStoreSessionError}</h3>
 		   	<h3 class="main-body-text">${addStoreError}</h3>
 		   	<h3 class="main-body-text">${addStoreSuccess}</h3>
 		</form:form>
     	<br>
     	<!-- GET -->
-    	<form action="./getStore" method="post">
+    	<form:form action="./getStore" method="post" modelAttribute="store">
 	    	<div class="main-body-text">
 	    		<h3>Get Store by ID to View Info</h3>
 	    		<label>ID: </label>
 	    		<br>
-	    		<input type="text" name="getsId"/>
+	    		<form:input path="sId"/>
 	    	</div>
 	    	<br>
     		<div>
 		      <input type="submit" value="Get Store" class="crud-btn"/>
 		    </div>
 		    <br>
+		    <h3 class="main-body-text">${getStoreSessionError}</h3>
 		    <h3 class="main-body-text">${getStoreError}</h3>
 		    <h5 class="main-body-text">${sId}${name}${address}${gmId}</h5>
-    	</form>
+    	</form:form>
 	    <br>
 	    <!-- UPDATE -->
 	    <form:form action="./updateStore" method="post" modelAttribute="store">
@@ -97,25 +99,27 @@
 			<div>
 		      <input type="submit" value="Update Store" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${updateStoreSessionError}</h3>
 		   	<h3 class="main-body-text">${updateStoreError}</h3>
 		   	<h3 class="main-body-text">${updateStoreSuccess}</h3>
 		</form:form>
 	    <br>
 	    <!-- REMOVE -->
-	    <form action="./removeStore" method="post">
+	    <form:form action="./removeStore" method="post" modelAttribute="store">
 	    	<div class="main-body-text">
 	    		<h3>Remove Store by ID</h3>
 	    		<label>ID: </label>
 	    		<br>
-	    		<input type="text" name="sId"/>
+	    		<form:input path="sId"/>
 	    	</div>
 	    	<br>
 	    	<div>
 		      <input type="submit" value="Remove Store" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${removeStoreSessionError}</h3>
 		    <h3 class="main-body-text">${removeStoreError}</h3>
 		    <h3 class="main-body-text">${removeStoreSuccess}</h3>
-	    </form>
+	    </form:form>
   	</div>
 </body>
 </html>

@@ -51,26 +51,28 @@
 			<div>
 		      <input type="submit" value="Add Equipment" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${addMacSessionError}</h3>
 		   	<h3 class="main-body-text">${addMacError}</h3>
 		   	<h3 class="main-body-text">${addMacSuccess}</h3>
 		</form:form>
     	<br>
     	<!-- GET -->
-    	<form action="./getMac" method="post">
+    	<form:form action="./getMac" method="post" modelAttribute="machinery">
 	    	<div class="main-body-text">
 	    		<h3>Get Equipment by ID to View Info</h3>
 	    		<label>ID: </label>
 	    		<br>
-	    		<input type="text" name="getmId"/>
+	    		<form:input path="mId"/>
 	    	</div>
 	    	<br>
     		<div>
 		      <input type="submit" value="Get Equipment" class="crud-btn"/>
 		    </div>
 		    <br>
+		    <h3 class="main-body-text">${getMacSessionError}</h3>
 		    <h3 class="main-body-text">${getMacError}</h3>
 		    <h5 class="main-body-text">${mId}${name}${status}${replacementCost}${storeId}</h5>
-    	</form>
+    	</form:form>
 	    <br>
 	    <!-- UPDATE -->
 	    <form:form action="./updateMac" method="post" modelAttribute="machinery">
@@ -109,25 +111,27 @@
 			<div>
 		      <input type="submit" value="Update Equipment" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${updateMacSessionError}</h3>
 		   	<h3 class="main-body-text">${updateMacError}</h3>
 		   	<h3 class="main-body-text">${updateMacSuccess}</h3>
 		</form:form>
 	    <br>
 	    <!-- REMOVE -->
-	    <form action="./removeMac" method="post">
+	    <form:form action="./removeMac" method="post" modelAttribute="machinery">
 	    	<div class="main-body-text">
 	    		<h3>Remove Equipment by ID</h3>
 	    		<label>ID: </label>
 	    		<br>
-	    		<input type="text" name="mId"/>
+	    		<form:input path="mId"/>
 	    	</div>
 	    	<br>
 	    	<div>
 		      <input type="submit" value="Remove Equipment" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${removeMacSessionError}</h3>
 		    <h3 class="main-body-text">${removeMacError}</h3>
 		    <h3 class="main-body-text">${removeMacSuccess}</h3>
-	    </form>
+	    </form:form>
   	</div>
 </body>
 </html>

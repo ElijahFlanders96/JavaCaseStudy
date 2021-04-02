@@ -69,26 +69,28 @@
 			<div>
 		      <input type="submit" value="Add Employee" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${addEmpSessionError}</h3>
 		   	<h3 class="main-body-text">${errorMessage}</h3>
 		   	<h3 class="main-body-text">${successMessage}</h3>
 		</form:form>
     	<br>
     	<!-- GET -->
-    	<form action="./getEmp" method="post">
+    	<form:form action="./getEmp" method="post" modelAttribute="employee">
 	    	<div class="main-body-text">
 	    		<h3>Get Employee by ID to View Info</h3>
 	    		<label>ID: </label>
 	    		<br>
-	    		<input type="text" name="geteId"/>
+	    		<form:input path="eId"/>
 	    	</div>
 	    	<br>
     		<div>
 		      <input type="submit" value="Get Employee" class="crud-btn"/>
 		    </div>
 		    <br>
+		    <h3 class="main-body-text">${getEmpSessionError}</h3>
 		    <h3 class="main-body-text">${getEmpError}</h3>
 		    <h5 class="main-body-text">${eId}${firstName}${lastName}${wage}${position}${email}${phoneNumber}${storeId}</h5>
-    	</form>
+    	</form:form>
 	    <br>
 	    <!-- UPDATE -->
 	    <form:form action="./updateEmp" method="post" modelAttribute="employee">
@@ -145,25 +147,27 @@
 			<div>
 		      <input type="submit" value="Update Employee" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${updateEmpSessionError}</h3>
 		   	<h3 class="main-body-text">${updateEmpError}</h3>
 		   	<h3 class="main-body-text">${updateEmpSuccess}</h3>
 		</form:form>
 	    <br>
 	    <!-- REMOVE -->
-	    <form action="./removeEmp" method="post">
+	    <form:form action="./removeEmp" method="post" modelAttribute="employee">
 	    	<div class="main-body-text">
 	    		<h3>Remove Employee by ID</h3>
 	    		<label>ID: </label>
 	    		<br>
-	    		<input type="text" name="eId"/>
+	    		<form:input path="eId"/>
 	    	</div>
 	    	<br>
 	    	<div>
 		      <input type="submit" value="Remove Employee" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${removeEmpSessionError}</h3>
 		    <h3 class="main-body-text">${removeEmpError}</h3>
 		    <h3 class="main-body-text">${removeEmpSuccess}</h3>
-	    </form>
+	    </form:form>
   	</div>
 </body>
 </html>

@@ -57,26 +57,28 @@
 			<div>
 		      <input type="submit" value="Add Vehicle" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${addCarSessionError}</h3>
 		   	<h3 class="main-body-text">${addCarError}</h3>
 		   	<h3 class="main-body-text">${addCarSuccess}</h3>
 		</form:form>
     	<br>
     	<!-- GET -->
-    	<form action="./getCar" method="post">
+    	<form:form action="./getCar" method="post" modelAttribute="driverVehicle">
 	    	<div class="main-body-text">
 	    		<h3>Get Vehicle by ID to View Info</h3>
 	    		<label>ID: </label>
 	    		<br>
-	    		<input type="text" name="getdId"/>
+	    		<form:input path="dId"/>
 	    	</div>
 	    	<br>
     		<div>
 		      <input type="submit" value="Get Vehicle" class="crud-btn"/>
 		    </div>
 		    <br>
+		    <h3 class="main-body-text">${getCarSessionError}</h3>
 		    <h3 class="main-body-text">${getCarError}</h3>
 		    <h5 class="main-body-text">${dId}${model}${year}${color}${insuranceProvider}${driverId}</h5>
-    	</form>
+    	</form:form>
 	    <br>
 	    <!-- UPDATE -->
 	    <form:form action="./updateCar" method="post" modelAttribute="driverVehicle">
@@ -121,25 +123,27 @@
 			<div>
 		      <input type="submit" value="Update Vehicle" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${updateCarSessionError}</h3>
 		   	<h3 class="main-body-text">${updateCarError}</h3>
 		   	<h3 class="main-body-text">${updateCarSuccess}</h3>
 		</form:form>
 	    <br>
 	    <!-- REMOVE -->
-	    <form action="./removeCar" method="post">
+	    <form:form action="./removeCar" method="post" modelAttribute="driverVehicle">
 	    	<div class="main-body-text">
 	    		<h3>Remove Vehicle by ID</h3>
 	    		<label>ID: </label>
 	    		<br>
-	    		<input type="text" name="dId"/>
+	    		<form:input path="dId"/>
 	    	</div>
 	    	<br>
 	    	<div>
 		      <input type="submit" value="Remove Vehicle" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${removeCarSessionError}</h3>
 		    <h3 class="main-body-text">${removeCarError}</h3>
 		    <h3 class="main-body-text">${removeCarSuccess}</h3>
-	    </form>
+	    </form:form>
   	</div>
 </body>
 </html>
