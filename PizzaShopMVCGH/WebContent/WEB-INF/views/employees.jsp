@@ -161,6 +161,7 @@
 	    	<div>
 		      <input type="submit" value="Remove Employee" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${removeEmpError}</h3>
 		    <h3 class="main-body-text">${removeEmpSuccess}</h3>
 	    </form>
   	</div>

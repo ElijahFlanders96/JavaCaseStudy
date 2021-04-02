@@ -137,6 +137,7 @@
 	    	<div>
 		      <input type="submit" value="Remove Vehicle" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${removeCarError}</h3>
 		    <h3 class="main-body-text">${removeCarSuccess}</h3>
 	    </form>
   	</div>

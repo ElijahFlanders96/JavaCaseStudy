@@ -41,7 +41,6 @@
 				<form:input path="replacementCost"/>
 				<form:errors path="replacementCost"/>
 			</div>
-			<br>
 			<div class="main-body-text">
 				<label>Store ID: </label>
 				<br>
@@ -100,7 +99,6 @@
 				<form:input path="replacementCost"/>
 				<form:errors path="replacementCost"/>
 			</div>
-			<br>
 			<div class="main-body-text">
 				<label>Store ID: </label>
 				<br>
@@ -127,6 +125,7 @@
 	    	<div>
 		      <input type="submit" value="Remove Equipment" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${removeMacError}</h3>
 		    <h3 class="main-body-text">${removeMacSuccess}</h3>
 	    </form>
   	</div>

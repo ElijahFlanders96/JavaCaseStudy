@@ -113,6 +113,7 @@
 	    	<div>
 		      <input type="submit" value="Remove Store" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${removeStoreError}</h3>
 		    <h3 class="main-body-text">${removeStoreSuccess}</h3>
 	    </form>
   	</div>

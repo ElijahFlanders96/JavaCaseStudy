@@ -76,6 +76,8 @@ public class HomeController {
 	}
 	
 	
+	
+	
 	//login functionality
 	@PostMapping("/login")
 	public String processLoginRequest(@RequestParam("eId") int eId, @RequestParam("email") String email, Model model, HttpSession session) {
@@ -88,6 +90,10 @@ public class HomeController {
 		model.addAttribute("loginFailedMessage", "Invalid Credentials");
 		return "login";
 	}
+	
+	
+	
+	
 	
 	
 	//EMP METHODS
@@ -108,16 +114,17 @@ public class HomeController {
 		emp = empService.getEmpService(eId);
 		if (emp==null) {
 			model.addAttribute("getEmpError", "Please enter the ID of an existing employee");
+		} else {
+			System.out.println(emp.getFirstName());
+			model.addAttribute("eId", emp.geteId() + ", ");
+			model.addAttribute("firstName", emp.getFirstName() + ", ");
+			model.addAttribute("lastName", emp.getLastName() + ", ");
+			model.addAttribute("wage", emp.getWage() + ", ");
+			model.addAttribute("position", emp.getPosition() + ", ");
+			model.addAttribute("email", emp.getEmail() + ", ");
+			model.addAttribute("phoneNumber", emp.getPhoneNumber() + ", ");
+			model.addAttribute("storeId", emp.getStoreId() + ", ");
 		}
-		System.out.println(emp.getFirstName());
-		model.addAttribute("eId", emp.geteId() + ", ");
-		model.addAttribute("firstName", emp.getFirstName() + ", ");
-		model.addAttribute("lastName", emp.getLastName() + ", ");
-		model.addAttribute("wage", emp.getWage() + ", ");
-		model.addAttribute("position", emp.getPosition() + ", ");
-		model.addAttribute("email", emp.getEmail() + ", ");
-		model.addAttribute("phoneNumber", emp.getPhoneNumber() + ", ");
-		model.addAttribute("storeId", emp.getStoreId() + ", ");
 		return "employees";
 	}
 	
@@ -135,10 +142,16 @@ public class HomeController {
 	
 	@PostMapping("/removeEmp")
 	public String removeEmployee(@ModelAttribute("employee") Employee emp, @RequestParam("eId") int eId, Model model) {
-		empService.removeEmpService(eId);
-		model.addAttribute("removeEmpSuccess", "Employee removed from database sucessfully!");
+		if (empService.getEmpService(eId)==null) {
+			model.addAttribute("removeEmpError", "Please enter the ID of an existing employee");
+		} else {
+			empService.removeEmpService(eId);
+			model.addAttribute("removeEmpSuccess", "Employee removed from database sucessfully!");
+		}
 		return "employees";
 	}
+	
+	
 	
 	
 	
@@ -162,11 +175,12 @@ public class HomeController {
 			store = storeService.getStoreService(sId);
 			if (store==null) {
 				model.addAttribute("getStoreError", "Please enter the ID of an existing store");
+			} else {
+				model.addAttribute("sId", store.getsId() + ", ");
+				model.addAttribute("name", store.getName() + ", ");
+				model.addAttribute("address", store.getAddress() + ", ");
+				model.addAttribute("gmId", store.getGmId() + ", ");
 			}
-			model.addAttribute("sId", store.getsId() + ", ");
-			model.addAttribute("name", store.getName() + ", ");
-			model.addAttribute("address", store.getAddress() + ", ");
-			model.addAttribute("gmId", store.getGmId() + ", ");
 			return "stores";
 		}
 		
@@ -184,10 +198,15 @@ public class HomeController {
 		
 		@PostMapping("/removeStore")
 		public String removeStore(@ModelAttribute("store") Store store, @RequestParam("sId") int sId, Model model) {
-			storeService.removeStoreService(sId);
-			model.addAttribute("removeStoreSuccess", "Store removed from database sucessfully!");
+			if (storeService.getStoreService(sId)==null) {
+				model.addAttribute("removeStoreError", "Please enter the ID of an existing store");
+			} else {
+				storeService.removeStoreService(sId);
+				model.addAttribute("removeStoreSuccess", "Store removed from database sucessfully!");
+			}
 			return "stores";
 		}
+		
 		
 		
 		
@@ -211,13 +230,14 @@ public class HomeController {
 			car = carService.getCarService(dId);
 			if (car==null) {
 				model.addAttribute("getCarError", "Please enter the ID of an existing vehicle");
+			} else {
+				model.addAttribute("dId", car.getdId() + ", ");
+				model.addAttribute("model", car.getModel() + ", ");
+				model.addAttribute("year", car.getYear() + ", ");
+				model.addAttribute("color", car.getColor() + ", ");
+				model.addAttribute("insuranceProvider", car.getInsuranceProvider() + ", ");
+				model.addAttribute("driverId", car.getDriverId() + ", ");
 			}
-			model.addAttribute("dId", car.getdId() + ", ");
-			model.addAttribute("model", car.getModel() + ", ");
-			model.addAttribute("year", car.getYear() + ", ");
-			model.addAttribute("color", car.getColor() + ", ");
-			model.addAttribute("insuranceProvider", car.getInsuranceProvider() + ", ");
-			model.addAttribute("driverId", car.getDriverId() + ", ");
 			return "vehicles";
 		}
 		
@@ -235,10 +255,18 @@ public class HomeController {
 		
 		@PostMapping("/removeCar")
 		public String removeCar(@ModelAttribute("driverVehicle") DriverVehicle car, @RequestParam("dId") int dId, Model model) {
-			carService.removeCarService(dId);
-			model.addAttribute("removeCarSuccess", "Vehicle removed from database sucessfully!");
+			if (carService.getCarService(dId)==null) {
+				model.addAttribute("RemoveCarError", "Please enter ID of an existing vehicle");
+			} else {
+				carService.removeCarService(dId);
+				model.addAttribute("removeCarSuccess", "Vehicle removed from database sucessfully!");
+			}
 			return "vehicles";
 		}
+		
+		
+		
+		
 		
 		
 		
@@ -260,12 +288,13 @@ public class HomeController {
 			mac = macService.getMacService(mId);
 			if (mac==null) {
 				model.addAttribute("getMacError", "Please enter the ID of existing equipment");
+			} else {
+				model.addAttribute("mId", mac.getmId() + ", ");
+				model.addAttribute("name", mac.getName() + ", ");
+				model.addAttribute("status", mac.getStatus() + ", ");
+				model.addAttribute("replacementCost", mac.getReplacementCost() + ", ");
+				model.addAttribute("storeId", mac.getStoreId() + ", ");
 			}
-			model.addAttribute("mId", mac.getmId() + ", ");
-			model.addAttribute("name", mac.getName() + ", ");
-			model.addAttribute("status", mac.getStatus() + ", ");
-			model.addAttribute("replacementCost", mac.getReplacementCost() + ", ");
-			model.addAttribute("storeId", mac.getStoreId() + ", ");
 			return "equipment";
 		}
 		
@@ -283,8 +312,12 @@ public class HomeController {
 		
 		@PostMapping("/removeMac")
 		public String removeMac(@ModelAttribute("machinery") Machinery mac, @RequestParam("mId") int mId, Model model) {
-			macService.removeMacService(mId);
-			model.addAttribute("removeMacSuccess", "Equipment removed from database sucessfully!");
+			if (macService.getMacService(mId)==null) {
+				model.addAttribute("removeMacError", "Please enter the ID of existing equipment");
+			} else {
+				macService.removeMacService(mId);
+				model.addAttribute("removeMacSuccess", "Equipment removed from database sucessfully!");
+			}
 			return "equipment";
 		}
 }
