@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.pizza.shop.dbConnection.DBConnection;
 import com.pizza.shop.entity.Employee;
+import com.pizza.shop.entity.Machinery;
 import com.pizza.shop.entity.Store;
 
 @Repository
@@ -77,5 +78,39 @@ public class StoreDao extends DBConnection implements StoreDaoI {
 		this.disconnect();
 		return stores;
 	}
+	
+//	@Override
+//	public void addEmpToStore(int eId, int sId) {
+//		this.connect();
+//		em.getTransaction().begin();
+//		Employee empFound = em.find(Employee.class, eId);
+//		Store storeFound = em.find(Store.class, sId);
+//		List<Employee> emps = storeFound.getEmpList();
+//		emps.add(empFound);
+//		em.getTransaction().commit();
+//		this.disconnect();
+//	}
+//
+//	@Override
+//	public void addMacToStore(int mId, int sId) {
+//		this.connect();
+//		em.getTransaction().begin();
+//		Machinery macFound = em.find(Machinery.class, mId);
+//		Store storeFound = em.find(Store.class, sId);
+//		List<Machinery> macs = storeFound.getMacList();
+//		macs.add(macFound);
+//		em.getTransaction().commit();
+//		this.disconnect();
+//	}
 
+	@Override
+	public List<Employee> viewAllEmp(int sId) {
+		return this.getStore(sId).getEmpList();
+	}
+
+	@Override
+	public List<Machinery> viewAllMac(int sId) {
+		return this.getStore(sId).getMacList();
+	}
+	
 }

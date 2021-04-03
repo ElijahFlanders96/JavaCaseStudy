@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pizza.shop.dao.StoreDao;
+import com.pizza.shop.entity.Employee;
+import com.pizza.shop.entity.Machinery;
 import com.pizza.shop.entity.Store;
 
 @Service
@@ -32,6 +34,18 @@ public class StoreService {
 	}
 	public void removeStoreService(int sId) {
 		storeD.removeStore(sId);
+	}
+//	public void addEmpToStoreService(int eId, int sId) {
+//		storeD.addEmpToStore(eId, sId);
+//	}
+//	public void addMacToStoreService(int mId, int sId) {
+//		storeD.addMacToStore(mId, sId);
+//	}
+	public List<Employee> viewAllEmpService(int sId) {
+		return storeD.viewAllEmp(sId);
+	}
+	public List<Machinery> viewAllMacService(int sId) {
+		return storeD.viewAllMac(sId);
 	}
 	public boolean validateStoreService(int sId, String name, String address) {
 		Store storeFound = storeD.getStore(sId);

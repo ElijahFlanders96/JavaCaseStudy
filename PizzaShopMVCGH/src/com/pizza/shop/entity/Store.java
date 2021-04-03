@@ -1,9 +1,12 @@
 package com.pizza.shop.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,17 +22,23 @@ public class Store {
 	private String address;
 	@Column
 	private int gmId;
+	@OneToMany(targetEntity=Employee.class)
+	private List<Employee> empList;
+	@OneToMany(targetEntity=Machinery.class)
+	private List<Machinery> macList;
 	
 	public Store() {
 		super();
 	}
 
-	public Store(int sId, String name, String address, int gmId) {
+	public Store(int sId, String name, String address, int gmId, List<Employee> empList, List<Machinery> macList) {
 		super();
 		this.sId = sId;
 		this.name = name;
 		this.address = address;
 		this.gmId = gmId;
+		this.empList = empList;
+		this.macList = macList;
 	}
 
 	public int getsId() {
@@ -64,6 +73,22 @@ public class Store {
 		this.gmId = gmId;
 	}
 	
+	public List<Employee> getEmpList() {
+		return empList;
+	}
+
+	public void setEmpList(List<Employee> empList) {
+		this.empList = empList;
+	}
+
+	public List<Machinery> getMacList() {
+		return macList;
+	}
+
+	public void setMacList(List<Machinery> macList) {
+		this.macList = macList;
+	}
+
 	@Override
 	public String toString() {
 		// need to fill out the first argument, need to figure out how and don't want to rn
