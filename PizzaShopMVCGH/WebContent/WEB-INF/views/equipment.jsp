@@ -51,6 +51,7 @@
 			<div>
 		      <input type="submit" value="Add Equipment" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${addMacStoreError}</h3>
 		    <h3 class="main-body-text">${addMacSessionError}</h3>
 		   	<h3 class="main-body-text">${addMacError}</h3>
 		   	<h3 class="main-body-text">${addMacSuccess}</h3>

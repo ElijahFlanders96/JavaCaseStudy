@@ -69,6 +69,7 @@
 			<div>
 		      <input type="submit" value="Add Employee" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${addEmpStoreError}</h3>
 		    <h3 class="main-body-text">${addEmpSessionError}</h3>
 		   	<h3 class="main-body-text">${errorMessage}</h3>
 		   	<h3 class="main-body-text">${successMessage}</h3>

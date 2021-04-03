@@ -1,5 +1,7 @@
 package com.pizza.shop.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,10 +128,16 @@ public class HomeController {
 		} else {
 			empService.addEmpService(emp);
 			int sId = emp.getStoreId();
-			int eId = emp.geteId();
-			storeService.addEmpToStoreService(eId, sId);
-			model.addAttribute("successMessage", "Employee added to the database successfully!");
-			System.out.println("added to db successfully");
+			Store store = storeService.getStoreService(sId);
+			if (store==null) {
+				model.addAttribute("addEmpStoreError", "Please ensure that the Store ID matches the ID of an existing store");
+				return "employees";
+			} else {
+				int eId = emp.geteId();
+				storeService.addEmpToStoreService(eId, sId);
+				model.addAttribute("successMessage", "Employee added to the database successfully!");
+				System.out.println("added to db successfully");
+			}
 		}
 		return "employees";
 	}
@@ -360,10 +368,16 @@ public class HomeController {
 			} else {
 				macService.addMacService(mac);
 				int sId = mac.getStoreId();
-				int mId = mac.getmId();
-				storeService.addMacToStoreService(mId, sId);
-				model.addAttribute("addMacSuccess", "Equipment added to the database successfully!");
-				System.out.println("added to db successfully");
+				Store store = storeService.getStoreService(sId);
+				if (store==null) {
+					model.addAttribute("addMacStoreError", "Please ensure that the Store ID matches the ID of an existing store");
+					return "equipment";
+				} else {
+					int mId = mac.getmId();
+					storeService.addMacToStoreService(mId, sId);
+					model.addAttribute("addMacSuccess", "Equipment added to the database successfully!");
+					System.out.println("added to db successfully");
+				}
 			}
 			return "equipment";
 		}
