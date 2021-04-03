@@ -79,29 +79,53 @@ public class StoreDao extends DBConnection implements StoreDaoI {
 		return stores;
 	}
 	
-//	@Override
-//	public void addEmpToStore(int eId, int sId) {
-//		this.connect();
-//		em.getTransaction().begin();
-//		Employee empFound = em.find(Employee.class, eId);
-//		Store storeFound = em.find(Store.class, sId);
-//		List<Employee> emps = storeFound.getEmpList();
-//		emps.add(empFound);
-//		em.getTransaction().commit();
-//		this.disconnect();
-//	}
-//
-//	@Override
-//	public void addMacToStore(int mId, int sId) {
-//		this.connect();
-//		em.getTransaction().begin();
-//		Machinery macFound = em.find(Machinery.class, mId);
-//		Store storeFound = em.find(Store.class, sId);
-//		List<Machinery> macs = storeFound.getMacList();
-//		macs.add(macFound);
-//		em.getTransaction().commit();
-//		this.disconnect();
-//	}
+	@Override
+	public void addEmpToStore(int eId, int sId) {
+		this.connect();
+		em.getTransaction().begin();
+		Employee empFound = em.find(Employee.class, eId);
+		Store storeFound = em.find(Store.class, sId);
+		List<Employee> emps = storeFound.getEmpList();
+		emps.add(empFound);
+		em.getTransaction().commit();
+		this.disconnect();
+	}
+
+	@Override
+	public void addMacToStore(int mId, int sId) {
+		this.connect();
+		em.getTransaction().begin();
+		Machinery macFound = em.find(Machinery.class, mId);
+		Store storeFound = em.find(Store.class, sId);
+		List<Machinery> macs = storeFound.getMacList();
+		macs.add(macFound);
+		em.getTransaction().commit();
+		this.disconnect();
+	}
+	
+	@Override
+	public void removeEmpFromStore(int eId, int sId) {
+		this.connect();
+		em.getTransaction().begin();
+		Employee empFound = em.find(Employee.class, eId);
+		Store storeFound =em.find(Store.class, sId);
+		List<Employee> emps = storeFound.getEmpList();
+		emps.remove(empFound);
+		em.getTransaction().commit();
+		this.disconnect();
+	}
+
+	@Override
+	public void removeMacFromStore(int mId, int sId) {
+		this.connect();
+		em.getTransaction().begin();
+		Machinery macFound = em.find(Machinery.class, mId);
+		Store storeFound =em.find(Store.class, sId);
+		List<Machinery> macs = storeFound.getMacList();
+		macs.remove(macFound);
+		em.getTransaction().commit();
+		this.disconnect();
+	}
 
 	@Override
 	public List<Employee> viewAllEmp(int sId) {

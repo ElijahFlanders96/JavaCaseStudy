@@ -12,8 +12,10 @@ public interface StoreDaoI {
 	public boolean updateStore(Store store);
 	public boolean removeStore(int sId);
 	public List<Store> getAllStore();
-//	public void addEmpToStore(int eId, int sId);
-//	public void addMacToStore(int mId, int sId);
+	public void addEmpToStore(int eId, int sId);
+	public void addMacToStore(int mId, int sId);
+	public void removeEmpFromStore(int eId, int sId);
+	public void removeMacFromStore(int mId, int sId);
 	public List<Employee> viewAllEmp(int sId);
 	public List<Machinery> viewAllMac(int sId);
 }

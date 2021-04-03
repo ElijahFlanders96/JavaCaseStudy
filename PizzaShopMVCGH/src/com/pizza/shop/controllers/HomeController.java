@@ -125,6 +125,9 @@ public class HomeController {
 			return "employees";
 		} else {
 			empService.addEmpService(emp);
+			int sId = emp.getStoreId();
+			int eId = emp.geteId();
+			storeService.addEmpToStoreService(eId, sId);
 			model.addAttribute("successMessage", "Employee added to the database successfully!");
 			System.out.println("added to db successfully");
 		}
@@ -175,12 +178,15 @@ public class HomeController {
 	@PostMapping("/removeEmp")
 	public String removeEmployee(@ModelAttribute("employee") Employee emp, @RequestParam("eId") int eId, Model model, HttpSession session) {
 		Object loggedIn = session.getAttribute("currentUser");
+		emp = empService.getEmpService(eId);
 		if (empService.getEmpService(eId)==null) {
 			model.addAttribute("removeEmpError", "Please enter the ID of an existing employee");
 		} else if (loggedIn==null) {
 			model.addAttribute("removeEmpSessionError", "You must be logged in to remove an employee from the database");
 			return "employees";
 		} else {
+			int sId = emp.getStoreId();
+			storeService.removeEmpFromStoreService(eId, sId);
 			empService.removeEmpService(eId);
 			model.addAttribute("removeEmpSuccess", "Employee removed from database sucessfully!");
 		}
@@ -353,6 +359,9 @@ public class HomeController {
 				return "equipment";
 			} else {
 				macService.addMacService(mac);
+				int sId = mac.getStoreId();
+				int mId = mac.getmId();
+				storeService.addMacToStoreService(mId, sId);
 				model.addAttribute("addMacSuccess", "Equipment added to the database successfully!");
 				System.out.println("added to db successfully");
 			}
@@ -398,12 +407,15 @@ public class HomeController {
 		@PostMapping("/removeMac")
 		public String removeMac(@ModelAttribute("machinery") Machinery mac, @RequestParam("mId") int mId, Model model, HttpSession session) {
 			Object loggedIn = session.getAttribute("currentUser");
+			mac = macService.getMacService(mId);
 			if (macService.getMacService(mId)==null) {
 				model.addAttribute("removeMacError", "Please enter the ID of existing equipment");
 			} else if (loggedIn==null) {
 				model.addAttribute("removeMacSessionError", "You must be logged in to remove equipment from the database");
 				return "equipment";
 			} else {
+				int sId = mac.getStoreId();
+				storeService.removeMacFromStoreService(mId, sId);
 				macService.removeMacService(mId);
 				model.addAttribute("removeMacSuccess", "Equipment removed from database sucessfully!");
 			}

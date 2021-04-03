@@ -35,12 +35,18 @@ public class StoreService {
 	public void removeStoreService(int sId) {
 		storeD.removeStore(sId);
 	}
-//	public void addEmpToStoreService(int eId, int sId) {
-//		storeD.addEmpToStore(eId, sId);
-//	}
-//	public void addMacToStoreService(int mId, int sId) {
-//		storeD.addMacToStore(mId, sId);
-//	}
+	public void addEmpToStoreService(int eId, int sId) {
+		storeD.addEmpToStore(eId, sId);
+	}
+	public void addMacToStoreService(int mId, int sId) {
+		storeD.addMacToStore(mId, sId);
+	}
+	public void removeEmpFromStoreService(int eId, int sId) {
+		storeD.removeEmpFromStore(eId, sId);
+	}
+	public void removeMacFromStoreService(int mId, int sId) {
+		storeD.removeMacFromStore(mId,sId);
+	}
 	public List<Employee> viewAllEmpService(int sId) {
 		return storeD.viewAllEmp(sId);
 	}
