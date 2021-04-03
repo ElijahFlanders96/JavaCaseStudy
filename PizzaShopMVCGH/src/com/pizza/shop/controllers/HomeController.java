@@ -126,7 +126,6 @@ public class HomeController {
 			model.addAttribute("addEmpSessionError", "You must be logged in to add an employee to the database");
 			return "employees";
 		} else {
-			empService.addEmpService(emp);
 			int sId = emp.getStoreId();
 			Store store = storeService.getStoreService(sId);
 			if (store==null) {
@@ -134,6 +133,7 @@ public class HomeController {
 				return "employees";
 			} else {
 				int eId = emp.geteId();
+				empService.addEmpService(emp);
 				storeService.addEmpToStoreService(eId, sId);
 				model.addAttribute("successMessage", "Employee added to the database successfully!");
 				System.out.println("added to db successfully");
@@ -284,11 +284,16 @@ public class HomeController {
 		@PostMapping("/addCar")
 		public String addNewCar(@ModelAttribute("driverVehicle") DriverVehicle car, Model model, BindingResult result, HttpSession session) {
 			Object loggedIn = session.getAttribute("currentUser");
+			int eId = car.getDriverId();
+			Employee driver = empService.getEmpService(eId);
 			if (result.hasErrors()) {
 				model.addAttribute("addCarError", "There was an error with an input field, please try again");
 				return "vehicles";
 			} else if (loggedIn==null) {
 				model.addAttribute("addCarSessionError", "You must be logged in to add a vehicle to the database");
+				return "vehicles";
+			} else if (driver==null) {
+				model.addAttribute("addCarEmpError", "The Driver ID must correspond with an existing employee");
 				return "vehicles";
 			}
 			carService.addCarService(car);
@@ -365,8 +370,10 @@ public class HomeController {
 			} else if (loggedIn==null) {
 				model.addAttribute("addMacSessionError", "You must be logged in to add equipment to the database");
 				return "equipment";
+			} else if (mac.getStatus() <1 || mac.getStatus() > 3) {
+				model.addAttribute("addMacStatusError", "Please select a Status value between 1 and 3");
+				return "equipment";
 			} else {
-				macService.addMacService(mac);
 				int sId = mac.getStoreId();
 				Store store = storeService.getStoreService(sId);
 				if (store==null) {
@@ -374,6 +381,7 @@ public class HomeController {
 					return "equipment";
 				} else {
 					int mId = mac.getmId();
+					macService.addMacService(mac);
 					storeService.addMacToStoreService(mId, sId);
 					model.addAttribute("addMacSuccess", "Equipment added to the database successfully!");
 					System.out.println("added to db successfully");
@@ -409,6 +417,9 @@ public class HomeController {
 				return "equipment";
 			} else if (loggedIn==null) {
 				model.addAttribute("updateMacSessionError", "You must be logged in to update equipment in the database");
+				return "equipment";
+			} else if (mac.getStatus() <1 || mac.getStatus() > 3) {
+				model.addAttribute("updateMacStatusError", "Please select a Status value between 1 and 3");
 				return "equipment";
 			} else {
 				macService.updateMacService(mac);
