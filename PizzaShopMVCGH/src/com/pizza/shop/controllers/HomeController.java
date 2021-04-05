@@ -118,7 +118,7 @@ public class HomeController {
 	
 	//EMP METHODS
 	@PostMapping("viewEmps")
-	public String viewEmpssByID(@ModelAttribute("employee") Employee emp, Model model, HttpSession session) {
+	public String viewEmpsByID(@ModelAttribute("employee") Employee emp, Model model, HttpSession session) {
 		Object loggedIn = session.getAttribute("currentUser");
 		if (loggedIn==null) {
 			model.addAttribute("viewEmpSessionError", "You must be logged in to view all employees in the database");
@@ -337,6 +337,18 @@ public class HomeController {
 		
 		
 		//VEHICLE METHODS
+		@PostMapping("viewCars")
+		public String viewCarsByID(@ModelAttribute("driverVehicle") DriverVehicle car, Model model, HttpSession session) {
+			Object loggedIn = session.getAttribute("currentUser");
+			if (loggedIn==null) {
+				model.addAttribute("viewCarSessionError", "You must be logged in to view all vehicles in the database");
+				return "vehicles";
+			} else {
+				model.addAttribute("carList", carService.getAllCarService());
+			}
+			return "vehicles";
+		}
+		
 		@PostMapping("/addCar")
 		public String addNewCar(@ModelAttribute("driverVehicle") DriverVehicle car, Model model, BindingResult result, HttpSession session) {
 			Object loggedIn = session.getAttribute("currentUser");
@@ -417,6 +429,18 @@ public class HomeController {
 		
 		
 		//EQUIPMENT METHODS
+		@PostMapping("viewMacs")
+		public String viewMacsByID(@ModelAttribute("machinery") Machinery mac, Model model, HttpSession session) {
+			Object loggedIn = session.getAttribute("currentUser");
+			if (loggedIn==null) {
+				model.addAttribute("viewMacSessionError", "You must be logged in to view all equipment in the database");
+				return "equipment";
+			} else {
+				model.addAttribute("macList", macService.getAllMacService());
+			}
+			return "equipment";
+		}
+		
 		@PostMapping("/addMac")
 		public String addNewMac(@ModelAttribute("machinery") Machinery mac, Model model, BindingResult result, HttpSession session) {
 			Object loggedIn = session.getAttribute("currentUser");

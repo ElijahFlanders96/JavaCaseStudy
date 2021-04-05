@@ -23,6 +23,7 @@
 			<div>
 			    <input type="submit" value="View Employees" class="crud-btn"/>
 			</div>
+			<h3 class="main-body-text">${viewEmpSessionError}</h3>
 			<h3 class="main-body-text">${empList}</h3>
 		</form:form>
 		<br>

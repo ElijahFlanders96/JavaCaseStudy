@@ -15,6 +15,18 @@
 	<%@ include file="navbar.html" %>
 	<div class="main-body">
 	<!-- ADD -->
+		<form:form action="./viewCars" method="post" modelAttribute="driverVehicle">
+			<div class="main-body-text">
+				<h3>View All Vehicles</h3>
+			</div>
+			<br>
+			<div>
+			    <input type="submit" value="View Vehicles" class="crud-btn"/>
+			</div>
+			<h3 class="main-body-text">${viewCarSessionError}</h3>
+			<h3 class="main-body-text">${carList}</h3>
+		</form:form>
+		<br>
 		<form:form action="./addCar" method="post" modelAttribute="driverVehicle">
 			<div class="main-body-text">
 				<h3>Add A New Vehicle</h3>

@@ -15,6 +15,18 @@
 	<%@ include file="navbar.html" %>
 	<div class="main-body">
 	<!-- ADD -->
+		<form:form action="./viewMacs" method="post" modelAttribute="machinery">
+			<div class="main-body-text">
+				<h3>View All Equipment</h3>
+			</div>
+			<br>
+			<div>
+			    <input type="submit" value="View Equipment" class="crud-btn"/>
+			</div>
+			<h3 class="main-body-text">${viewMacSessionError}</h3>
+			<h3 class="main-body-text">${macList}</h3>
+		</form:form>
+		<br>
 		<form:form action="./addMac" method="post" modelAttribute="machinery">
 			<div class="main-body-text">
 				<h6>STATUS LEGEND:</h6>

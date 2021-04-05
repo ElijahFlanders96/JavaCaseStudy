@@ -89,7 +89,7 @@ public class DriverVehicle {
 	@Override
 	public String toString() {
 		// need to fill out the first argument, need to figure out how and don't want to rn
-		return String.format("", dId, model, year, color, insuranceProvider, driverId);
+		return String.format("ID: %-20s Model: %-20s Year: %-20s Color: %-20s Insurance Provider: %-20s Driver ID: %-20s", dId, model, year, color, insuranceProvider, driverId);
 	}
 	
 	@Override
