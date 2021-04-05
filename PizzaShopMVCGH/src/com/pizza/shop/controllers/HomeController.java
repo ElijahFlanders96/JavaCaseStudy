@@ -1,5 +1,6 @@
 package com.pizza.shop.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -116,6 +117,18 @@ public class HomeController {
 	
 	
 	//EMP METHODS
+	@PostMapping("viewEmps")
+	public String viewEmpssByID(@ModelAttribute("employee") Employee emp, Model model, HttpSession session) {
+		Object loggedIn = session.getAttribute("currentUser");
+		if (loggedIn==null) {
+			model.addAttribute("viewEmpSessionError", "You must be logged in to view all employees in the database");
+			return "employees";
+		} else {
+			model.addAttribute("empList", empService.getAllEmpService());
+		}
+		return "employees";
+	}
+	
 	@PostMapping("/addEmp")
 	public String addNewEmployee(@ModelAttribute("employee") Employee emp, Model model, BindingResult result, HttpSession session) {
 		Object loggedIn = session.getAttribute("currentUser");
@@ -208,6 +221,18 @@ public class HomeController {
 	
 	
 	//STORE METHODS
+		@PostMapping("viewStores")
+		public String viewStoresByID(@ModelAttribute("store") Store store, Model model, HttpSession session) {
+			Object loggedIn = session.getAttribute("currentUser");
+			if (loggedIn==null) {
+				model.addAttribute("viewStoreSessionError", "You must be logged in to view all stores in the database");
+				return "stores";
+			} else {
+				model.addAttribute("storeList", storeService.getAllStoreService());
+			}
+			return "stores";
+		}
+	
 		@PostMapping("/addStore")
 		public String addNewStore(@ModelAttribute("store") Store store, Model model, BindingResult result, HttpSession session) {
 			Object loggedIn = session.getAttribute("currentUser");
@@ -275,7 +300,38 @@ public class HomeController {
 			return "stores";
 		}
 		
+		@PostMapping("/getEmpList")
+		public String getEmpList(@ModelAttribute("store") Store store, @RequestParam("sId") int sId, Model model, HttpSession session) {
+			Object loggedIn = session.getAttribute("currentUser");
+			if (storeService.getStoreService(sId)==null) {
+				model.addAttribute("empListStoreError", "Please enter the ID of an existing store");
+			} else if (loggedIn==null) {
+				model.addAttribute("empListSessionError", "You must be logged in to view all employees in a store");
+				return "stores";
+			} else {
+//				List<Employee> empList = storeService.viewAllEmpService(sId);
+//				for (Employee e : empList) {
+//					e.geteId();
+//				}
+//				store = storeService.getStoreService(sId);
+				model.addAttribute("empList", storeService.viewAllEmpService(sId));
+			}
+			return "stores";
+		}
 		
+		@PostMapping("/getMacList")
+		public String getMacList(@ModelAttribute("store") Store store, @RequestParam("sId") int sId, Model model, HttpSession session) {
+			Object loggedIn = session.getAttribute("currentUser");
+			if (storeService.getStoreService(sId)==null) {
+				model.addAttribute("macListStoreError", "Please enter the ID of an existing store");
+			} else if (loggedIn==null) {
+				model.addAttribute("macListSessionError", "You must be logged in to view all equipment in a store");
+				return "stores";
+			} else {
+				model.addAttribute("macList", storeService.viewAllMacService(sId));
+			}
+			return "stores";
+		}
 		
 		
 		

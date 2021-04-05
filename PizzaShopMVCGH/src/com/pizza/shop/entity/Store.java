@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -22,9 +23,9 @@ public class Store {
 	private String address;
 	@Column
 	private int gmId;
-	@OneToMany(targetEntity=Employee.class)
+	@OneToMany(targetEntity=Employee.class, fetch=FetchType.EAGER)
 	private List<Employee> empList;
-	@OneToMany(targetEntity=Machinery.class)
+	@OneToMany(targetEntity=Machinery.class, fetch=FetchType.EAGER)
 	private List<Machinery> macList;
 	
 	public Store() {
@@ -92,7 +93,7 @@ public class Store {
 	@Override
 	public String toString() {
 		// need to fill out the first argument, need to figure out how and don't want to rn
-		return String.format("", sId, name, address, gmId);
+		return String.format("ID: %-20s Name: %-20s Address: %-20s gmId: %-20s", sId, name, address, gmId);
 	}
 	
 	@Override

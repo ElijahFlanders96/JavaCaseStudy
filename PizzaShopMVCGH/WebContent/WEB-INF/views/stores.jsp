@@ -15,6 +15,17 @@
 	<%@ include file="navbar.html" %>
 	<div class="main-body">
 	<!-- ADD -->
+		<form:form action="./viewStores" method="post" modelAttribute="store">
+			<div class="main-body-text">
+				<h3>View All Stores</h3>
+			</div>
+			<br>
+			<div>
+		      <input type="submit" value="View Stores" class="crud-btn"/>
+		    </div>
+		    <h3 class="main-body-text">${storeList}</h3>
+		</form:form>
+		<br>
 		<form:form action="./addStore" method="post" modelAttribute="store">
 			<div class="main-body-text">
 				<h3>Add A New Store</h3>
@@ -119,6 +130,38 @@
 		    <h3 class="main-body-text">${removeStoreSessionError}</h3>
 		    <h3 class="main-body-text">${removeStoreError}</h3>
 		    <h3 class="main-body-text">${removeStoreSuccess}</h3>
+	    </form:form>
+	    <br>
+	    <form:form action="./getEmpList" method="post" modelAttribute="store">
+	    	<div class="main-body-text">
+	    		<h3>View All Employees Based on Store ID: </h3>
+	    		<label>ID: </label>
+	    		<br>
+	    		<form:input path="sId"/>
+	    	</div>
+	    	<br>
+	    	<div>
+		      <input type="submit" value="View Employees" class="crud-btn"/>
+		    </div>
+		    <h3 class="main-body-text">${empListStoreError}</h3>
+		    <h3 class="main-body-text">${empListSessionError}</h3>
+		    <h3 class="main-body-text">${empList}</h3>
+	    </form:form>
+	    <br>
+	    <form:form action="./getMacList" method="post" modelAttribute="store">
+	    	<div class="main-body-text">
+	    		<h3>View All Equipment Based on Store ID: </h3>
+	    		<label>ID: </label>
+	    		<br>
+	    		<form:input path="sId"/>
+	    	</div>
+	    	<br>
+	    	<div>
+		      <input type="submit" value="View Equipment" class="crud-btn"/>
+		    </div>
+		    <h3 class="main-body-text">${macListStoreError}</h3>
+		    <h3 class="main-body-text">${macListSessionError}</h3>
+		    <h3 class="main-body-text">${macList}</h3>
 	    </form:form>
   	</div>
 </body>

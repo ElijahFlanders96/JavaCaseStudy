@@ -80,7 +80,7 @@ public class Machinery {
 	@Override
 	public String toString() {
 		// need to fill out the first argument, need to figure out how and don't want to rn
-		return String.format("", mId, name, status, replacementCost, storeId);
+		return String.format("ID: %-20s Name: %-20s Status: %-20s Replacement Cost: %-20s", mId, name, status, replacementCost);
 	}
 	
 	@Override

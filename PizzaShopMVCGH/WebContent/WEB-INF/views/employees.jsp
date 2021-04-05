@@ -15,6 +15,17 @@
 	<%@ include file="navbar.html" %>
 	<div class="main-body">
 	<!-- ADD -->
+		<form:form action="./viewEmps" method="post" modelAttribute="employees">
+			<div class="main-body-text">
+				<h3>View All Employees</h3>
+			</div>
+			<br>
+			<div>
+			    <input type="submit" value="View Employees" class="crud-btn"/>
+			</div>
+			<h3 class="main-body-text">${empList}</h3>
+		</form:form>
+		<br>
 		<form:form action="./addEmp" method="post" modelAttribute="employee">
 			<div class="main-body-text">
 				<h3>Add A New Employee</h3>
