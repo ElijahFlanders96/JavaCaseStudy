@@ -17,6 +17,10 @@
 	<!-- ADD -->
 		<form:form action="./viewMacs" method="post" modelAttribute="machinery">
 			<div class="main-body-text">
+				<h6>STATUS LEGEND:</h6>
+				<p>Enter one of the following digit values for "Status" based on its respective value:</p>
+				<p>1: no issues, 2: needs maintenance, 3: requires replacement</p>
+				<br>
 				<h3>View All Equipment</h3>
 			</div>
 			<br>
@@ -29,9 +33,6 @@
 		<br>
 		<form:form action="./addMac" method="post" modelAttribute="machinery">
 			<div class="main-body-text">
-				<h6>STATUS LEGEND:</h6>
-				<p>Enter one of the following digit values for "Status" based on its respective value:</p>
-				<p>1: no issues, 2: needs maintenance, 3: requires replacement</p>
 				<h3>Add New Equipment</h3>
 				<label>ID: </label>
 				<br>
@@ -128,6 +129,7 @@
 			<div>
 		      <input type="submit" value="Update Equipment" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${updateMacStoreError}</h3>
 		    <h3 class="main-body-text">${updateMacStatusError}</h3>
 		    <h3 class="main-body-text">${updateMacSessionError}</h3>
 		   	<h3 class="main-body-text">${updateMacError}</h3>

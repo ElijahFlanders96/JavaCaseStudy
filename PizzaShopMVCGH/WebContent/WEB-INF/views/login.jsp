@@ -24,6 +24,8 @@
 	<div class="main-body">
 		<form action="./login" method="post">
 			<div class="main-body-text">
+				<p>Must log in as a General Manager to interact with this application</p>
+				<br>
 				<h3>Employee ID: </h3>
 				<input type="text" name="eId"/>
 			</div>

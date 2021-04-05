@@ -22,9 +22,10 @@ import com.pizza.shop.service.DriverVehicleService;
 import com.pizza.shop.service.EmployeeService;
 import com.pizza.shop.service.MachineryService;
 import com.pizza.shop.service.StoreService;
+import com.pizza.shop.utilizes.Utilizes;
 
 @Controller
-public class HomeController {
+public class HomeController extends Utilizes {
 	
 	private EmployeeService empService;
 	private StoreService storeService;
@@ -41,46 +42,46 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String showWelcomePageInit() {
-		return "welcome";
+		return welcome;
 	}
 	
 	@GetMapping("/welcome")
 	public String showWelcomePage() {
-		return "welcome";
+		return welcome;
 	}
 	
 	@GetMapping("/employees")
 	public String showEmployeesPage(Model model) {
 		model.addAttribute("employee", new Employee());
-		return "employees";
+		return employees;
 	}
 	
 	@GetMapping("/equipment")
 	public String showEquipmentPage(Model model) {
 		model.addAttribute("machinery", new Machinery());
-		return "equipment";
+		return equipment;
 	}
 	
 	@GetMapping("/vehicles")
 	public String showVehiclesPage(Model model) {
 		model.addAttribute("driverVehicle", new DriverVehicle());
-		return "vehicles";
+		return vehicles;
 	}
 	
 	@GetMapping("/stores")
 	public String showStoresPage(Model model) {
 		model.addAttribute("store", new Store());
-		return "stores";
+		return stores;
 	}
 	
 	@GetMapping("/login")
 	public String showLoginPage() {
-		return "login";
+		return login;
 	}
 	
 	@GetMapping("/logout")
 	public String showLogoutPage() {
-		return "logout";
+		return logout;
 	}
 	
 	
@@ -93,10 +94,10 @@ public class HomeController {
 		if (emp!=null && emp.getPosition().equals("General Manager") && email.equals(emp.getEmail())) {
 			session.setAttribute("currentUser", emp);
 			model.addAttribute("loginSuccessMessage", "Welcome,");
-			return "login";
+			return login;
 		}
 		model.addAttribute("loginFailedMessage", "Invalid Credentials");
-		return "login";
+		return login;
 	}
 	
 	@PostMapping("/logout")
@@ -106,9 +107,9 @@ public class HomeController {
 			session.removeAttribute("currentUser");
 		} else {
 			model.addAttribute("logoutError", "Nobody is logged in!");
-			return "logout";
+			return logout;
 		}
-		return "login";
+		return logout;
 	}
 	
 	
@@ -122,11 +123,11 @@ public class HomeController {
 		Object loggedIn = session.getAttribute("currentUser");
 		if (loggedIn==null) {
 			model.addAttribute("viewEmpSessionError", "You must be logged in to view all employees in the database");
-			return "employees";
+			return employees;
 		} else {
 			model.addAttribute("empList", empService.getAllEmpService());
 		}
-		return "employees";
+		return employees;
 	}
 	
 	@PostMapping("/addEmp")
@@ -134,16 +135,16 @@ public class HomeController {
 		Object loggedIn = session.getAttribute("currentUser");
 		if (result.hasErrors()) {
 			model.addAttribute("errorMessage", "There was an error with an input field, please try again");
-			return "employees";
+			return employees;
 		} else if (loggedIn==null) {
 			model.addAttribute("addEmpSessionError", "You must be logged in to add an employee to the database");
-			return "employees";
+			return employees;
 		} else {
 			int sId = emp.getStoreId();
 			Store store = storeService.getStoreService(sId);
 			if (store==null) {
 				model.addAttribute("addEmpStoreError", "Please ensure that the Store ID matches the ID of an existing store");
-				return "employees";
+				return employees;
 			} else {
 				int eId = emp.geteId();
 				empService.addEmpService(emp);
@@ -152,7 +153,7 @@ public class HomeController {
 				System.out.println("added to db successfully");
 			}
 		}
-		return "employees";
+		return employees;
 	}
 	
 	@PostMapping("/getEmp")
@@ -161,10 +162,10 @@ public class HomeController {
 		emp = empService.getEmpService(eId);
 		if (emp==null) {
 			model.addAttribute("getEmpError", "Please enter the ID of an existing employee");
-			return "employees";
+			return employees;
 		} else if (loggedIn==null) {
 			model.addAttribute("getEmpSessionError", "You must be logged in to view an employee in the database");
-			return "employees";
+			return employees;
 		} else {
 			System.out.println(emp.getFirstName());
 			model.addAttribute("eId", emp.geteId() + ", ");
@@ -176,7 +177,7 @@ public class HomeController {
 			model.addAttribute("phoneNumber", emp.getPhoneNumber() + ", ");
 			model.addAttribute("storeId", emp.getStoreId() + ", ");
 		}
-		return "employees";
+		return employees;
 	}
 	
 	@PostMapping("/updateEmp")
@@ -184,16 +185,25 @@ public class HomeController {
 		Object loggedIn = session.getAttribute("currentUser");
 		if (result.hasErrors()) {
 			model.addAttribute("updateEmpError", "There was an error with an input field, please try again");
-			return "employees";
+			return employees;
 		} else if (loggedIn==null) {
 			model.addAttribute("updateEmpSessionError", "You must be logged in to update an employee in the database");
-			return "employees";
+			return employees;
 		} else {
-			empService.updateEmpService(emp);
-			model.addAttribute("updateEmpSuccess", "Employee updated successfully!");
-			System.out.println("updated successfully");
+			int sId = emp.getStoreId();
+			Store store = storeService.getStoreService(sId);
+			if (store==null) {
+				model.addAttribute("updateEmpStoreError", "Please ensure that the Store ID matches the ID of an existing store");
+				return employees;
+			} else {
+				int eId = emp.geteId();
+				storeService.removeEmpFromStoreService(eId, sId);
+				empService.updateEmpService(emp);
+				storeService.addEmpToStoreService(eId, sId);
+				model.addAttribute("updateEmpSuccess", "Employee updated successfully!");
+			}
 		}
-		return "employees";
+		return employees;
 	}
 	
 	@PostMapping("/removeEmp")
@@ -204,14 +214,14 @@ public class HomeController {
 			model.addAttribute("removeEmpError", "Please enter the ID of an existing employee");
 		} else if (loggedIn==null) {
 			model.addAttribute("removeEmpSessionError", "You must be logged in to remove an employee from the database");
-			return "employees";
+			return employees;
 		} else {
 			int sId = emp.getStoreId();
 			storeService.removeEmpFromStoreService(eId, sId);
 			empService.removeEmpService(eId);
 			model.addAttribute("removeEmpSuccess", "Employee removed from database sucessfully!");
 		}
-		return "employees";
+		return employees;
 	}
 	
 	
@@ -226,11 +236,11 @@ public class HomeController {
 			Object loggedIn = session.getAttribute("currentUser");
 			if (loggedIn==null) {
 				model.addAttribute("viewStoreSessionError", "You must be logged in to view all stores in the database");
-				return "stores";
+				return stores;
 			} else {
 				model.addAttribute("storeList", storeService.getAllStoreService());
 			}
-			return "stores";
+			return stores;
 		}
 	
 		@PostMapping("/addStore")
@@ -238,16 +248,16 @@ public class HomeController {
 			Object loggedIn = session.getAttribute("currentUser");
 			if (result.hasErrors()) {
 				model.addAttribute("addStoreError", "There was an error with an input field, please try again");
-				return "stores";
+				return stores;
 			} else if (loggedIn==null) {
 				model.addAttribute("addStoreSessionError", "You must be logged in to add a store to the database");
-				return "stores";
+				return stores;
 			} else {
 				storeService.addStoreService(store);
 				model.addAttribute("addStoreSuccess", "Store added to the database successfully!");
 				System.out.println("added to db successfully");
 			}
-			return "stores";
+			return stores;
 		}
 		
 		@PostMapping("/getStore")
@@ -258,14 +268,14 @@ public class HomeController {
 				model.addAttribute("getStoreError", "Please enter the ID of an existing store");
 			} else if (loggedIn==null) {
 				model.addAttribute("getStoreSessionError", "You must be logged in to view a store in the database");
-				return "stores";
+				return stores;
 			} else {
 				model.addAttribute("sId", store.getsId() + ", ");
 				model.addAttribute("name", store.getName() + ", ");
 				model.addAttribute("address", store.getAddress() + ", ");
 				model.addAttribute("gmId", store.getGmId() + ", ");
 			}
-			return "stores";
+			return stores;
 		}
 		
 		@PostMapping("/updateStore")
@@ -273,16 +283,16 @@ public class HomeController {
 			Object loggedIn = session.getAttribute("currentUser");
 			if (result.hasErrors()) {
 				model.addAttribute("updateStoreError", "There was an error with an input field, please try again");
-				return "stores";
+				return stores;
 			} else if (loggedIn==null) {
 				model.addAttribute("updateStoreSessionError", "You must be logged in to update a store in the database");
-				return "stores";
+				return stores;
 			} else {
 				storeService.updateStoreService(store);
 				model.addAttribute("updateStoreSuccess", "Store updated successfully!");
 				System.out.println("updated successfully");
 			}
-			return "stores";
+			return stores;
 		}
 		
 		@PostMapping("/removeStore")
@@ -292,12 +302,12 @@ public class HomeController {
 				model.addAttribute("removeStoreError", "Please enter the ID of an existing store");
 			} else if (loggedIn==null) {
 				model.addAttribute("removeStoreSessionError", "You must be logged in to remove a store from the database");
-				return "stores";
+				return stores;
 			} else {
 				storeService.removeStoreService(sId);
 				model.addAttribute("removeStoreSuccess", "Store removed from database sucessfully!");
 			}
-			return "stores";
+			return stores;
 		}
 		
 		@PostMapping("/getEmpList")
@@ -307,16 +317,11 @@ public class HomeController {
 				model.addAttribute("empListStoreError", "Please enter the ID of an existing store");
 			} else if (loggedIn==null) {
 				model.addAttribute("empListSessionError", "You must be logged in to view all employees in a store");
-				return "stores";
+				return stores;
 			} else {
-//				List<Employee> empList = storeService.viewAllEmpService(sId);
-//				for (Employee e : empList) {
-//					e.geteId();
-//				}
-//				store = storeService.getStoreService(sId);
 				model.addAttribute("empList", storeService.viewAllEmpService(sId));
 			}
-			return "stores";
+			return stores;
 		}
 		
 		@PostMapping("/getMacList")
@@ -326,11 +331,11 @@ public class HomeController {
 				model.addAttribute("macListStoreError", "Please enter the ID of an existing store");
 			} else if (loggedIn==null) {
 				model.addAttribute("macListSessionError", "You must be logged in to view all equipment in a store");
-				return "stores";
+				return stores;
 			} else {
 				model.addAttribute("macList", storeService.viewAllMacService(sId));
 			}
-			return "stores";
+			return stores;
 		}
 		
 		
@@ -342,11 +347,11 @@ public class HomeController {
 			Object loggedIn = session.getAttribute("currentUser");
 			if (loggedIn==null) {
 				model.addAttribute("viewCarSessionError", "You must be logged in to view all vehicles in the database");
-				return "vehicles";
+				return vehicles;
 			} else {
 				model.addAttribute("carList", carService.getAllCarService());
 			}
-			return "vehicles";
+			return vehicles;
 		}
 		
 		@PostMapping("/addCar")
@@ -356,18 +361,18 @@ public class HomeController {
 			Employee driver = empService.getEmpService(eId);
 			if (result.hasErrors()) {
 				model.addAttribute("addCarError", "There was an error with an input field, please try again");
-				return "vehicles";
+				return vehicles;
 			} else if (loggedIn==null) {
 				model.addAttribute("addCarSessionError", "You must be logged in to add a vehicle to the database");
-				return "vehicles";
+				return vehicles;
 			} else if (driver==null) {
 				model.addAttribute("addCarEmpError", "The Driver ID must correspond with an existing employee");
-				return "vehicles";
+				return vehicles;
 			}
 			carService.addCarService(car);
 			model.addAttribute("addCarSuccess", "Vehicle added to the database successfully!");
 			System.out.println("added to db successfully");
-			return "vehicles";
+			return vehicles;
 		}
 		
 		@PostMapping("/getCar")
@@ -378,7 +383,7 @@ public class HomeController {
 				model.addAttribute("getCarError", "Please enter the ID of an existing vehicle");
 			} else if (loggedIn==null) {
 				model.addAttribute("getCarSessionError", "You must be logged in to view a vehicle in the database");
-				return "vehicles";
+				return vehicles;
 			} else {
 				model.addAttribute("dId", car.getdId() + ", ");
 				model.addAttribute("model", car.getModel() + ", ");
@@ -387,7 +392,7 @@ public class HomeController {
 				model.addAttribute("insuranceProvider", car.getInsuranceProvider() + ", ");
 				model.addAttribute("driverId", car.getDriverId() + ", ");
 			}
-			return "vehicles";
+			return vehicles;
 		}
 		
 		@PostMapping("/updateCar")
@@ -395,31 +400,31 @@ public class HomeController {
 			Object loggedIn = session.getAttribute("currentUser");
 			if (result.hasErrors()) {
 				model.addAttribute("updateCarError", "There was an error with an input field, please try again");
-				return "vehicles";
+				return vehicles;
 			} else if (loggedIn==null) {
 				model.addAttribute("updateCarSessionError", "You must be logged in to update a vehicle in the database");
-				return "vehicles";
+				return vehicles;
 			} else {
 				carService.updateCarService(car);
 				model.addAttribute("updateCarSuccess", "Vehicle updated successfully!");
 				System.out.println("updated successfully");
 			}
-			return "vehicles";
+			return vehicles;
 		}
 		
 		@PostMapping("/removeCar")
 		public String removeCar(@ModelAttribute("driverVehicle") DriverVehicle car, @RequestParam("dId") int dId, Model model, HttpSession session) {
 			Object loggedIn = session.getAttribute("currentUser");
 			if (carService.getCarService(dId)==null) {
-				model.addAttribute("RemoveCarError", "Please enter ID of an existing vehicle");
+				model.addAttribute("removeCarError", "Please enter ID of an existing vehicle");
 			} else if (loggedIn==null) {
 				model.addAttribute("removeCarSessionError", "You must be logged in to remove a vehicle in the database");
-				return "vehicles";
+				return vehicles;
 			} else {
 				carService.removeCarService(dId);
 				model.addAttribute("removeCarSuccess", "Vehicle removed from database sucessfully!");
 			}
-			return "vehicles";
+			return vehicles;
 		}
 		
 		
@@ -434,11 +439,11 @@ public class HomeController {
 			Object loggedIn = session.getAttribute("currentUser");
 			if (loggedIn==null) {
 				model.addAttribute("viewMacSessionError", "You must be logged in to view all equipment in the database");
-				return "equipment";
+				return equipment;
 			} else {
 				model.addAttribute("macList", macService.getAllMacService());
 			}
-			return "equipment";
+			return equipment;
 		}
 		
 		@PostMapping("/addMac")
@@ -446,19 +451,19 @@ public class HomeController {
 			Object loggedIn = session.getAttribute("currentUser");
 			if (result.hasErrors()) {
 				model.addAttribute("addMacError", "There was an error with an input field, please try again");
-				return "equipment";
+				return equipment;
 			} else if (loggedIn==null) {
 				model.addAttribute("addMacSessionError", "You must be logged in to add equipment to the database");
-				return "equipment";
+				return equipment;
 			} else if (mac.getStatus() <1 || mac.getStatus() > 3) {
 				model.addAttribute("addMacStatusError", "Please select a Status value between 1 and 3");
-				return "equipment";
+				return equipment;
 			} else {
 				int sId = mac.getStoreId();
 				Store store = storeService.getStoreService(sId);
 				if (store==null) {
 					model.addAttribute("addMacStoreError", "Please ensure that the Store ID matches the ID of an existing store");
-					return "equipment";
+					return equipment;
 				} else {
 					int mId = mac.getmId();
 					macService.addMacService(mac);
@@ -467,7 +472,7 @@ public class HomeController {
 					System.out.println("added to db successfully");
 				}
 			}
-			return "equipment";
+			return equipment;
 		}
 		
 		@PostMapping("/getMac")
@@ -478,7 +483,7 @@ public class HomeController {
 				model.addAttribute("getMacError", "Please enter the ID of existing equipment");
 			} else if (loggedIn==null) {
 				model.addAttribute("getMacSessionError", "You must be logged in to view equipment in the database");
-				return "equipment";
+				return equipment;
 			} else {
 				model.addAttribute("mId", mac.getmId() + ", ");
 				model.addAttribute("name", mac.getName() + ", ");
@@ -486,7 +491,7 @@ public class HomeController {
 				model.addAttribute("replacementCost", mac.getReplacementCost() + ", ");
 				model.addAttribute("storeId", mac.getStoreId() + ", ");
 			}
-			return "equipment";
+			return equipment;
 		}
 		
 		@PostMapping("/updateMac")
@@ -494,19 +499,28 @@ public class HomeController {
 			Object loggedIn = session.getAttribute("currentUser");
 			if (result.hasErrors()) {
 				model.addAttribute("updateMacError", "There was an error with an input field, please try again");
-				return "equipment";
+				return equipment;
 			} else if (loggedIn==null) {
 				model.addAttribute("updateMacSessionError", "You must be logged in to update equipment in the database");
-				return "equipment";
+				return equipment;
 			} else if (mac.getStatus() <1 || mac.getStatus() > 3) {
 				model.addAttribute("updateMacStatusError", "Please select a Status value between 1 and 3");
-				return "equipment";
+				return equipment;
 			} else {
-				macService.updateMacService(mac);
-				model.addAttribute("updateMacSuccess", "Equipment updated successfully!");
-				System.out.println("updated successfully");
+				int sId = mac.getStoreId();
+				Store store = storeService.getStoreService(sId);
+				if (store==null) {
+					model.addAttribute("updateMacStoreError", "Please ensure that the Store ID matches the ID of an existing store");
+					return equipment;
+				} else {
+					int mId = mac.getmId();
+					storeService.removeMacFromStoreService(mId, sId);
+					macService.updateMacService(mac);
+					storeService.addMacToStoreService(mId, sId);
+					model.addAttribute("updateMacSuccess", "Equipment updated successfully!");
+				}
 			}
-			return "equipment";
+			return equipment;
 		}
 		
 		@PostMapping("/removeMac")
@@ -517,13 +531,13 @@ public class HomeController {
 				model.addAttribute("removeMacError", "Please enter the ID of existing equipment");
 			} else if (loggedIn==null) {
 				model.addAttribute("removeMacSessionError", "You must be logged in to remove equipment from the database");
-				return "equipment";
+				return equipment;
 			} else {
 				int sId = mac.getStoreId();
 				storeService.removeMacFromStoreService(mId, sId);
 				macService.removeMacService(mId);
 				model.addAttribute("removeMacSuccess", "Equipment removed from database sucessfully!");
 			}
-			return "equipment";
+			return equipment;
 		}
 }

@@ -111,7 +111,7 @@ public class Employee {
 	@Override
 	public String toString() {
 		// need to fill out the first argument, need to figure out how and don't want to rn
-		return String.format("ID: %-20s Name: %-20s %-20s Wage: %-20s Position: %-20s Email: %-20s Phone Number: %-20s", eId, firstName, lastName, wage, position, email, phoneNumber);
+		return String.format("ID: %-20s Name: %-20s %-20s Wage: %-20s Position: %-20s Email: %-20s Phone Number: %-20s Store ID: %-20s", eId, firstName, lastName, wage, position, email, phoneNumber, storeId);
 	}
 	
 	@Override

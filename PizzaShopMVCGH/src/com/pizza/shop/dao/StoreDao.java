@@ -74,7 +74,7 @@ public class StoreDao extends DBConnection implements StoreDaoI {
 	@Override
 	public List<Store> getAllStore() {
 		this.connect();
-		List<Store> stores = em.createQuery("select s from Store s").getResultList();
+		List<Store> stores = em.createQuery("select s from store s").getResultList();
 		this.disconnect();
 		return stores;
 	}
