@@ -89,9 +89,9 @@ public class HomeController extends Utilizes {
 	
 	//login functionality
 	@PostMapping("/login")
-	public String processLoginRequest(@RequestParam("eId") int eId, @RequestParam("email") String email, Model model, HttpSession session) {
+	public String processLoginRequest(@RequestParam("eId") int eId, @RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) {
 		Employee emp = empService.getEmpService(eId);
-		if (emp!=null && emp.getPosition().equals("General Manager") && email.equals(emp.getEmail())) {
+		if (emp!=null && emp.getPosition().equals("General Manager") && email.equals(emp.getEmail()) && password.equals(emp.getPassword())) {
 			session.setAttribute("currentUser", emp);
 			model.addAttribute("loginSuccessMessage", "Welcome,");
 			return login;
@@ -109,7 +109,7 @@ public class HomeController extends Utilizes {
 			model.addAttribute("logoutError", "Nobody is logged in!");
 			return logout;
 		}
-		return logout;
+		return logoutComplete;
 	}
 	
 	
@@ -253,6 +253,11 @@ public class HomeController extends Utilizes {
 				model.addAttribute("addStoreSessionError", "You must be logged in to add a store to the database");
 				return stores;
 			} else {
+				int eId = store.getGmId();
+				Employee emp = empService.getEmpService(eId);
+				if (emp==null || emp.getPosition() != "General Manager") {
+					model.addAttribute("addStoreGMError", "");
+				}
 				storeService.addStoreService(store);
 				model.addAttribute("addStoreSuccess", "Store added to the database successfully!");
 				System.out.println("added to db successfully");

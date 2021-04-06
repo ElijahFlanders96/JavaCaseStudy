@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,11 @@
 			    <input type="submit" value="View Employees" class="crud-btn"/>
 			</div>
 			<h3 class="main-body-text">${viewEmpSessionError}</h3>
-			<h3 class="main-body-text">${empList}</h3>
+			<div class="main-body-text" >
+				<c:forEach items = "${empList}" var="emp">
+					<h5><c:out value="${emp}"/><h5>
+				</c:forEach>
+			</div>
 		</form:form>
 		<br>
 		<form:form action="./addEmp" method="post" modelAttribute="employee">
@@ -64,6 +69,12 @@
 				<br>
 				<form:input path="email"/>
 				<form:errors path="email"/>
+			</div>
+			<div class="main-body-text">
+				<label>Password: </label>
+				<br>
+				<form:input path="password"/>
+				<form:errors path="password"/>
 			</div>
 			<div class="main-body-text">
 				<label>Phone Number: </label>
@@ -143,6 +154,12 @@
 				<br>
 				<form:input path="email"/>
 				<form:errors path="email"/>
+			</div>
+			<div class="main-body-text">
+				<label>Password: </label>
+				<br>
+				<form:input path="password"/>
+				<form:errors path="password"/>
 			</div>
 			<div class="main-body-text">
 				<label>Phone Number: </label>

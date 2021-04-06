@@ -8,4 +8,5 @@ public class Utilizes {
 	protected static String vehicles = "vehicles";
 	protected static String login = "login";
 	protected static String logout = "logout";
+	protected static String logoutComplete = "redirect:login";
 }

@@ -24,6 +24,8 @@ public class Employee {
 	@Column
 	private String email;
 	@Column
+	private String password;
+	@Column
 	private String phoneNumber;
 	@Column
 	private int storeId;
@@ -32,7 +34,7 @@ public class Employee {
 		super();
 	}
 
-	public Employee(int eId, String firstName, String lastName, double wage, String position, String email, String phoneNumber, int storeId) {
+	public Employee(int eId, String firstName, String lastName, double wage, String position, String email, String password, String phoneNumber, int storeId) {
 		super();
 		this.eId = eId;
 		this.firstName = firstName;
@@ -40,6 +42,7 @@ public class Employee {
 		this.wage = wage;
 		this.position = position;
 		this.email = email;
+		this.password = password;
 		this.phoneNumber = phoneNumber;
 		this.storeId = storeId;
 	}
@@ -92,6 +95,14 @@ public class Employee {
 		this.email = email;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -111,7 +122,7 @@ public class Employee {
 	@Override
 	public String toString() {
 		// need to fill out the first argument, need to figure out how and don't want to rn
-		return String.format("ID: %-20s Name: %-20s %-20s Wage: %-20s Position: %-20s Email: %-20s Phone Number: %-20s Store ID: %-20s", eId, firstName, lastName, wage, position, email, phoneNumber, storeId);
+		return String.format("\nID: %-20s Name: %-20s %-20s Wage: %-20s Position: %-20s Email: %-20s Phone Number: %-20s Store ID: %-20s\n", eId, firstName, lastName, wage, position, email, phoneNumber, storeId);
 	}
 	
 	@Override
@@ -122,7 +133,8 @@ public class Employee {
 			&& this.lastName.equals(comparedTo.getLastName())
 			&& this.wage==comparedTo.getWage()
 			&& this.position.equals(comparedTo.getPosition()) 
-			&& this.email.equals(comparedTo.getEmail()) 
+			&& this.email.equals(comparedTo.getEmail())
+			&& this.password.equals(comparedTo.getPassword())
 			&& this.phoneNumber.equals(comparedTo.getPhoneNumber()) 
 			&& this.storeId==comparedTo.getStoreId()) {
 			return true;

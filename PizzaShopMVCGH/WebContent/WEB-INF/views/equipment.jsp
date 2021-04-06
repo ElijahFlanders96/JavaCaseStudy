@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +29,11 @@
 			    <input type="submit" value="View Equipment" class="crud-btn"/>
 			</div>
 			<h3 class="main-body-text">${viewMacSessionError}</h3>
-			<h3 class="main-body-text">${macList}</h3>
+			<div class="main-body-text" >
+				<c:forEach items = "${macList}" var="mac">
+					<h5><c:out value="${mac}"/><h5>
+				</c:forEach>
+			</div>
 		</form:form>
 		<br>
 		<form:form action="./addMac" method="post" modelAttribute="machinery">

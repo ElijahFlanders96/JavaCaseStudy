@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,11 @@
 		      <input type="submit" value="View Stores" class="crud-btn"/>
 		    </div>
 		    <h3 class="main-body-text">${viewStoreSessionError}</h3>
-		    <h3 class="main-body-text">${storeList}</h3>
+		    <div class="main-body-text" >
+				<c:forEach items = "${storeList}" var="store">
+					<h5><c:out value="${store}"/><h5>
+				</c:forEach>
+			</div>
 		</form:form>
 		<br>
 		<form:form action="./addStore" method="post" modelAttribute="store">
@@ -146,7 +151,11 @@
 		    </div>
 		    <h3 class="main-body-text">${empListStoreError}</h3>
 		    <h3 class="main-body-text">${empListSessionError}</h3>
-		    <h3 class="main-body-text">${empList}</h3>
+		    <div class="main-body-text" >
+				<c:forEach items = "${empList}" var="emps">
+					<h5><c:out value="${emps}"/><h5>
+				</c:forEach>
+			</div>
 	    </form:form>
 	    <br>
 	    <form:form action="./getMacList" method="post" modelAttribute="store">
@@ -162,7 +171,11 @@
 		    </div>
 		    <h3 class="main-body-text">${macListStoreError}</h3>
 		    <h3 class="main-body-text">${macListSessionError}</h3>
-		    <h3 class="main-body-text">${macList}</h3>
+		    <div class="main-body-text" >
+				<c:forEach items = "${macList}" var="macs">
+					<h5><c:out value="${macs}"/><h5>
+				</c:forEach>
+			</div>
 	    </form:form>
   	</div>
 </body>

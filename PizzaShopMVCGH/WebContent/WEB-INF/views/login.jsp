@@ -36,6 +36,11 @@
 			</div>
 			<br>
 			<div class="main-body-text">
+				<h3>Password: </h3>
+				<input type="text" name="password"/>
+			</div>
+			<br>
+			<div class="main-body-text">
 				<input type="submit" value="Login" id="login-btn"/>
 			</div>
 		</form>

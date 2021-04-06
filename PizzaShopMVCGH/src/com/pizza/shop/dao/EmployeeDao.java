@@ -46,6 +46,7 @@ public class EmployeeDao extends DBConnection implements EmployeeDaoI {
 			empFound.setWage(emp.getWage());
 			empFound.setPosition(emp.getPosition());
 			empFound.setEmail(emp.getEmail());
+			empFound.setPassword(emp.getPassword());
 			empFound.setPhoneNumber(emp.getPhoneNumber());
 			empFound.setStoreId(emp.getStoreId());
 			em.getTransaction().commit();
