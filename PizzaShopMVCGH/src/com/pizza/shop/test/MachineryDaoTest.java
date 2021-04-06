@@ -49,27 +49,27 @@ public class MachineryDaoTest {
 	}
 
 	@Test
-	public void testAddMac() {
+	public void testBAddMac() {
 		System.out.println("testAddMac");
 		boolean actual = mDao.addMac(this.macExpected);
 		assertTrue(actual);
 	}
 	
 	@Test
-	public void testBGetMac() {
+	public void testCGetMac() {
 		System.out.println("testGetMac");
 		Machinery actual = mDao.getMac(this.macId);
 		assertEquals(this.macExpected, actual);
 	}
 	
 	@Test
-	public void testCUpdateMac() {
+	public void testDUpdateMac() {
 		System.out.println("testUpdateMac");
 		assertTrue(mDao.updateMac(this.macExpected));
 	}
 	
 	@Test
-	public void testDRemoveMac() {
+	public void testARemoveMac() {
 		System.out.println("testRemoveMac");
 		boolean actual = mDao.removeMac(this.macId);
 		assertEquals(true, actual);

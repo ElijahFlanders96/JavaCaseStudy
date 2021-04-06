@@ -65,27 +65,27 @@ public class StoreDaoTest {
 	}
 
 	@Test
-	public void testAddStore() {
+	public void testBAddStore() {
 		System.out.println("testAddStore");
 		boolean actual = sDao.addStore(this.storeExpected);
 		assertTrue(actual);
 	}
 	
 	@Test
-	public void testBGetStore() {
+	public void testCGetStore() {
 		System.out.println("testGetStore");
 		Store actual = sDao.getStore(this.storeId);
 		assertEquals(this.storeExpected, actual);
 	}
 	
 	@Test
-	public void testCUpdateStore() {
+	public void testDUpdateStore() {
 		System.out.println("testUpdateStore");
 		assertTrue(sDao.updateStore(this.storeExpected));
 	}
 	
 	@Test
-	public void testDRemoveStore() {
+	public void testARemoveStore() {
 		System.out.println("testRemoveEmp");
 		boolean actual = sDao.removeStore(this.storeId);
 		assertEquals(true, actual);

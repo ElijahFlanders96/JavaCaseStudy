@@ -48,29 +48,29 @@ public class EmployeeDaoTest {
 	public static void setUp() throws Exception {
 		eDao = new EmployeeDao();
 	}
-
+	
 	@Test
-	public void testAddEmp() {
+	public void testBAddEmp() {
 		System.out.println("testAddEmp");
 		boolean actual = eDao.addEmp(this.empExpected);
 		assertTrue(actual);
 	}
 	
 	@Test
-	public void testBGetEmp() {
+	public void testCGetEmp() {
 		System.out.println("testGetEmp");
 		Employee actual = eDao.getEmp(this.empId);
 		assertEquals(this.empExpected, actual);
 	}
 	
 	@Test
-	public void testCUpdateEmp() {
+	public void testDUpdateEmp() {
 		System.out.println("testUpdateEmp");
 		assertTrue(eDao.updateEmp(this.empExpected));
 	}
 	
 	@Test
-	public void testDRemoveEmp() {
+	public void testARemoveEmp() {
 		System.out.println("testRemoveEmp");
 		boolean actual = eDao.removeEmp(this.empId);
 		assertEquals(true, actual);

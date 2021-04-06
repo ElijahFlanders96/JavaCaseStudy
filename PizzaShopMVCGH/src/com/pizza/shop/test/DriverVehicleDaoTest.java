@@ -7,13 +7,16 @@ import java.util.Collection;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.junit.runners.Parameterized;
 
 import com.pizza.shop.dao.DriverVehicleDao;
 import com.pizza.shop.entity.DriverVehicle;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Parameterized.class)
 public class DriverVehicleDaoTest {
 	static DriverVehicleDao dDao;
@@ -40,27 +43,27 @@ public class DriverVehicleDaoTest {
 	}
 
 	@Test
-	public void testAddCar() {
+	public void testBAddCar() {
 		System.out.println("testAddCar");
 		boolean actual = dDao.addCar(this.carExpected);
 		assertTrue(actual);
 	}
 	
 	@Test
-	public void testBGetCar() {
+	public void testCGetCar() {
 		System.out.println("testGetCar");
 		DriverVehicle actual = dDao.getCar(this.carId);
 		assertEquals(this.carExpected, actual);
 	}
 	
 	@Test
-	public void testCUpdateCar() {
+	public void testDUpdateCar() {
 		System.out.println("testUpdateCar");
 		assertTrue(dDao.updateCar(this.carExpected));
 	}
 	
 	@Test
-	public void testDRemoveCar() {
+	public void testARemoveCar() {
 		System.out.println("testRemoveCar");
 		boolean actual = dDao.removeCar(this.carId);
 		assertEquals(true, actual);
