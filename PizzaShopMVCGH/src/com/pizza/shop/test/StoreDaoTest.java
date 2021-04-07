@@ -42,7 +42,7 @@ public class StoreDaoTest {
 //	List<Employee> list3 = new ArrayList<Employee>();
 //	List<Employee> list4 = new ArrayList<Employee>();
 	
-	
+//	static List<Employee> list = storeExpected.getEmpList();
 	
 	public StoreDaoTest(int storeId, Store storeExpected) {
 		this.storeId = storeId;

@@ -18,6 +18,7 @@ import com.pizza.shop.entity.DriverVehicle;
 import com.pizza.shop.entity.Employee;
 import com.pizza.shop.entity.Machinery;
 import com.pizza.shop.entity.Store;
+import com.pizza.shop.exceptions.NoZeroException;
 import com.pizza.shop.service.DriverVehicleService;
 import com.pizza.shop.service.EmployeeService;
 import com.pizza.shop.service.MachineryService;
@@ -133,11 +134,20 @@ public class HomeController extends Utilizes {
 	@PostMapping("/addEmp")
 	public String addNewEmployee(@ModelAttribute("employee") Employee emp, Model model, BindingResult result, HttpSession session) {
 		Object loggedIn = session.getAttribute("currentUser");
+		int eId = emp.geteId();
 		if (result.hasErrors()) {
 			model.addAttribute("errorMessage", "There was an error with an input field, please try again");
 			return employees;
 		} else if (loggedIn==null) {
 			model.addAttribute("addEmpSessionError", "You must be logged in to add an employee to the database");
+			return employees;
+		} else if (eId==0) {
+			model.addAttribute("addEmpNoZero", "0 is not a vailid ID");
+			try {
+				throw new NoZeroException("0 is not a vailid ID");
+			} catch (NoZeroException e) {
+				e.printStackTrace();
+			}
 			return employees;
 		} else {
 			int sId = emp.getStoreId();
@@ -146,7 +156,6 @@ public class HomeController extends Utilizes {
 				model.addAttribute("addEmpStoreError", "Please ensure that the Store ID matches the ID of an existing store");
 				return employees;
 			} else {
-				int eId = emp.geteId();
 				empService.addEmpService(emp);
 				storeService.addEmpToStoreService(eId, sId);
 				model.addAttribute("successMessage", "Employee added to the database successfully!");
@@ -183,11 +192,20 @@ public class HomeController extends Utilizes {
 	@PostMapping("/updateEmp")
 	public String updateEmployee(@ModelAttribute("employee") Employee emp, Model model, BindingResult result, HttpSession session) {
 		Object loggedIn = session.getAttribute("currentUser");
+		int eId = emp.geteId();
 		if (result.hasErrors()) {
 			model.addAttribute("updateEmpError", "There was an error with an input field, please try again");
 			return employees;
 		} else if (loggedIn==null) {
 			model.addAttribute("updateEmpSessionError", "You must be logged in to update an employee in the database");
+			return employees;
+		} else if (eId==0) {
+			model.addAttribute("updateEmpNoZero", "0 is not a vailid ID");
+			try {
+				throw new NoZeroException("0 is not a vailid ID");
+			} catch (NoZeroException e) {
+				e.printStackTrace();
+			}
 			return employees;
 		} else {
 			int sId = emp.getStoreId();
@@ -196,7 +214,6 @@ public class HomeController extends Utilizes {
 				model.addAttribute("updateEmpStoreError", "Please ensure that the Store ID matches the ID of an existing store");
 				return employees;
 			} else {
-				int eId = emp.geteId();
 				storeService.removeEmpFromStoreService(eId, sId);
 				empService.updateEmpService(emp);
 				storeService.addEmpToStoreService(eId, sId);
@@ -246,11 +263,20 @@ public class HomeController extends Utilizes {
 		@PostMapping("/addStore")
 		public String addNewStore(@ModelAttribute("store") Store store, Model model, BindingResult result, HttpSession session) {
 			Object loggedIn = session.getAttribute("currentUser");
+			int sId = store.getsId();
 			if (result.hasErrors()) {
 				model.addAttribute("addStoreError", "There was an error with an input field, please try again");
 				return stores;
 			} else if (loggedIn==null) {
 				model.addAttribute("addStoreSessionError", "You must be logged in to add a store to the database");
+				return stores;
+			} else if (sId==0) {
+				model.addAttribute("addStoreNoZero", "0 is not a vailid ID");
+				try {
+					throw new NoZeroException("0 is not a vailid ID");
+				} catch (NoZeroException e) {
+					e.printStackTrace();
+				}
 				return stores;
 			} else {
 				int eId = store.getGmId();
@@ -286,11 +312,20 @@ public class HomeController extends Utilizes {
 		@PostMapping("/updateStore")
 		public String updateStore(@ModelAttribute("store") Store store, Model model, BindingResult result, HttpSession session) {
 			Object loggedIn = session.getAttribute("currentUser");
+			int sId = store.getsId();
 			if (result.hasErrors()) {
 				model.addAttribute("updateStoreError", "There was an error with an input field, please try again");
 				return stores;
 			} else if (loggedIn==null) {
 				model.addAttribute("updateStoreSessionError", "You must be logged in to update a store in the database");
+				return stores;
+			} else if (sId==0) {
+				model.addAttribute("updateStoreNoZero", "0 is not a vailid ID");
+				try {
+					throw new NoZeroException("0 is not a vailid ID");
+				} catch (NoZeroException e) {
+					e.printStackTrace();
+				}
 				return stores;
 			} else {
 				storeService.updateStoreService(store);
@@ -362,6 +397,7 @@ public class HomeController extends Utilizes {
 		@PostMapping("/addCar")
 		public String addNewCar(@ModelAttribute("driverVehicle") DriverVehicle car, Model model, BindingResult result, HttpSession session) {
 			Object loggedIn = session.getAttribute("currentUser");
+			int dId = car.getdId();
 			int eId = car.getDriverId();
 			Employee driver = empService.getEmpService(eId);
 			if (result.hasErrors()) {
@@ -373,10 +409,18 @@ public class HomeController extends Utilizes {
 			} else if (driver==null) {
 				model.addAttribute("addCarEmpError", "The Driver ID must correspond with an existing employee");
 				return vehicles;
+			} else if (dId==0) {
+				model.addAttribute("addCarNoZero", "0 is not a vailid ID");
+				try {
+					throw new NoZeroException("0 is not a vailid ID");
+				} catch (NoZeroException e) {
+					e.printStackTrace();
+				}
+				return vehicles;
+			} else {
+				carService.addCarService(car);
+				model.addAttribute("addCarSuccess", "Vehicle added to the database successfully!");
 			}
-			carService.addCarService(car);
-			model.addAttribute("addCarSuccess", "Vehicle added to the database successfully!");
-			System.out.println("added to db successfully");
 			return vehicles;
 		}
 		
@@ -403,11 +447,25 @@ public class HomeController extends Utilizes {
 		@PostMapping("/updateCar")
 		public String updateCar(@ModelAttribute("driverVehicle") DriverVehicle car, Model model, BindingResult result, HttpSession session) {
 			Object loggedIn = session.getAttribute("currentUser");
+			int dId = car.getdId();
+			int eId = car.getDriverId();
+			Employee driver = empService.getEmpService(eId);
 			if (result.hasErrors()) {
 				model.addAttribute("updateCarError", "There was an error with an input field, please try again");
 				return vehicles;
 			} else if (loggedIn==null) {
 				model.addAttribute("updateCarSessionError", "You must be logged in to update a vehicle in the database");
+				return vehicles;
+			} else if (driver==null) {
+				model.addAttribute("updateCarEmpError", "The Driver ID must correspond with an existing employee");
+				return vehicles;
+			} else if (dId==0) {
+				model.addAttribute("updateCarNoZero", "0 is not a vailid ID");
+				try {
+					throw new NoZeroException("0 is not a vailid ID");
+				} catch (NoZeroException e) {
+					e.printStackTrace();
+				}
 				return vehicles;
 			} else {
 				carService.updateCarService(car);
@@ -454,6 +512,7 @@ public class HomeController extends Utilizes {
 		@PostMapping("/addMac")
 		public String addNewMac(@ModelAttribute("machinery") Machinery mac, Model model, BindingResult result, HttpSession session) {
 			Object loggedIn = session.getAttribute("currentUser");
+			int mId = mac.getmId();
 			if (result.hasErrors()) {
 				model.addAttribute("addMacError", "There was an error with an input field, please try again");
 				return equipment;
@@ -463,6 +522,14 @@ public class HomeController extends Utilizes {
 			} else if (mac.getStatus() <1 || mac.getStatus() > 3) {
 				model.addAttribute("addMacStatusError", "Please select a Status value between 1 and 3");
 				return equipment;
+			} else if (mId==0) {
+				model.addAttribute("addMacNoZero", "0 is not a vailid ID");
+				try {
+					throw new NoZeroException("0 is not a vailid ID");
+				} catch (NoZeroException e) {
+					e.printStackTrace();
+				}
+				return equipment;
 			} else {
 				int sId = mac.getStoreId();
 				Store store = storeService.getStoreService(sId);
@@ -470,7 +537,6 @@ public class HomeController extends Utilizes {
 					model.addAttribute("addMacStoreError", "Please ensure that the Store ID matches the ID of an existing store");
 					return equipment;
 				} else {
-					int mId = mac.getmId();
 					macService.addMacService(mac);
 					storeService.addMacToStoreService(mId, sId);
 					model.addAttribute("addMacSuccess", "Equipment added to the database successfully!");
@@ -502,6 +568,7 @@ public class HomeController extends Utilizes {
 		@PostMapping("/updateMac")
 		public String updateMac(@ModelAttribute("machinery") Machinery mac, Model model, BindingResult result, HttpSession session) {
 			Object loggedIn = session.getAttribute("currentUser");
+			int mId = mac.getmId();
 			if (result.hasErrors()) {
 				model.addAttribute("updateMacError", "There was an error with an input field, please try again");
 				return equipment;
@@ -511,6 +578,14 @@ public class HomeController extends Utilizes {
 			} else if (mac.getStatus() <1 || mac.getStatus() > 3) {
 				model.addAttribute("updateMacStatusError", "Please select a Status value between 1 and 3");
 				return equipment;
+			} else if (mId==0) {
+				model.addAttribute("updateMacNoZero", "0 is not a vailid ID");
+				try {
+					throw new NoZeroException("0 is not a vailid ID");
+				} catch (NoZeroException e) {
+					e.printStackTrace();
+				}
+				return equipment;
 			} else {
 				int sId = mac.getStoreId();
 				Store store = storeService.getStoreService(sId);
@@ -518,7 +593,6 @@ public class HomeController extends Utilizes {
 					model.addAttribute("updateMacStoreError", "Please ensure that the Store ID matches the ID of an existing store");
 					return equipment;
 				} else {
-					int mId = mac.getmId();
 					storeService.removeMacFromStoreService(mId, sId);
 					macService.updateMacService(mac);
 					storeService.addMacToStoreService(mId, sId);

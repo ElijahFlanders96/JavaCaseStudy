@@ -62,6 +62,7 @@
 			<div>
 		      <input type="submit" value="Add Store" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${addStoreNoZero}</h3>
 		    <h3 class="main-body-text">${addStoreSessionError}</h3>
 		   	<h3 class="main-body-text">${addStoreError}</h3>
 		   	<h3 class="main-body-text">${addStoreSuccess}</h3>
@@ -116,6 +117,7 @@
 			<div>
 		      <input type="submit" value="Update Store" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${updateStoreNoZero}</h3>
 		    <h3 class="main-body-text">${updateStoreSessionError}</h3>
 		   	<h3 class="main-body-text">${updateStoreError}</h3>
 		   	<h3 class="main-body-text">${updateStoreSuccess}</h3>
@@ -153,7 +155,7 @@
 		    <h3 class="main-body-text">${empListSessionError}</h3>
 		    <div class="main-body-text" >
 				<c:forEach items = "${empList}" var="emps">
-					<h5><c:out value="${emps}"/><h5>
+					<h5><c:out value="${emps}"/></h5>
 				</c:forEach>
 			</div>
 	    </form:form>
