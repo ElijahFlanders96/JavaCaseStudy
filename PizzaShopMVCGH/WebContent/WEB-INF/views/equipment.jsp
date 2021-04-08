@@ -41,7 +41,7 @@
 				<h3>Add New Equipment</h3>
 				<label>ID: </label>
 				<br>
-				<form:input path="mId"/>
+				<form:input type="number" path="mId"/>
 				<form:errors path="mId"/>
 			</div>
 			<div class="main-body-text">
@@ -53,19 +53,19 @@
 			<div class="main-body-text">
 				<label>Status:</label>
 				<br>
-				<form:input path="status"/>
+				<form:input type="number" path="status"/>
 				<form:errors path="status"/>
 			</div>
 			<div class="main-body-text">
 				<label>Replacement Cost: </label>
 				<br>
-				<form:input path="replacementCost"/>
+				<form:input type="number" path="replacementCost"/>
 				<form:errors path="replacementCost"/>
 			</div>
 			<div class="main-body-text">
 				<label>Store ID: </label>
 				<br>
-				<form:input path="storeId"/>
+				<form:input type="number" path="storeId"/>
 				<form:errors path="storeId"/>
 			</div>
 			<br>
@@ -87,7 +87,7 @@
 	    		<h3>Get Equipment by ID to View Info</h3>
 	    		<label>ID: </label>
 	    		<br>
-	    		<form:input path="mId"/>
+	    		<form:input type="number" path="mId"/>
 	    	</div>
 	    	<br>
     		<div>
@@ -105,7 +105,7 @@
 				<h3>Update Existing Equipment</h3>
 				<label>ID: </label>
 				<br>
-				<form:input path="mId"/>
+				<form:input type="number" path="mId"/>
 				<form:errors path="mId"/>
 			</div>
 			<div class="main-body-text">
@@ -117,19 +117,19 @@
 			<div class="main-body-text">
 				<label>Status: </label>
 				<br>
-				<form:input path="status"/>
+				<form:input type="number" path="status"/>
 				<form:errors path="status"/>
 			</div>
 			<div class="main-body-text">
 				<label>Replacement Cost: </label>
 				<br>
-				<form:input path="replacementCost"/>
+				<form:input type="number" path="replacementCost"/>
 				<form:errors path="replacementCost"/>
 			</div>
 			<div class="main-body-text">
 				<label>Store ID: </label>
 				<br>
-				<form:input path="storeId"/>
+				<form:input type="number" path="storeId"/>
 				<form:errors path="storeId"/>
 			</div>
 			<br>
@@ -151,7 +151,7 @@
 	    		<h3>Remove Equipment by ID</h3>
 	    		<label>ID: </label>
 	    		<br>
-	    		<form:input path="mId"/>
+	    		<form:input type="number" path="mId"/>
 	    	</div>
 	    	<br>
 	    	<div>

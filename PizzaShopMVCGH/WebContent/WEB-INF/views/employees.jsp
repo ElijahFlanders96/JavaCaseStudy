@@ -37,7 +37,7 @@
 				<h3>Add A New Employee</h3>
 				<label>ID: </label>
 				<br>
-				<form:input path="eId"/>
+				<form:input type="number" path="eId"/>
 				<form:errors path="eId"/>
 			</div>
 			<div class="main-body-text">
@@ -55,7 +55,7 @@
 			<div class="main-body-text">
 				<label>Wage: </label>
 				<br>
-				<form:input path="wage"/>
+				<form:input type="number" path="wage"/>
 				<form:errors path="wage"/>
 			</div>
 			<div class="main-body-text">
@@ -85,7 +85,7 @@
 			<div class="main-body-text">
 				<label>Store ID: </label>
 				<br>
-				<form:input path="storeId"/>
+				<form:input type="number" path="storeId"/>
 				<form:errors path="storeId"/>
 			</div>
 			<br>
@@ -106,7 +106,7 @@
 	    		<h3>Get Employee by ID to View Info</h3>
 	    		<label>ID: </label>
 	    		<br>
-	    		<form:input path="eId"/>
+	    		<form:input type="number" path="eId"/>
 	    	</div>
 	    	<br>
     		<div>
@@ -124,7 +124,7 @@
 				<h3>Update an Existing Employee</h3>
 				<label>ID: </label>
 				<br>
-				<form:input path="eId"/>
+				<form:input type="number" path="eId"/>
 				<form:errors path="eId"/>
 			</div>
 			<div class="main-body-text">
@@ -142,7 +142,7 @@
 			<div class="main-body-text">
 				<label>Wage: </label>
 				<br>
-				<form:input path="wage"/>
+				<form:input type="number" path="wage"/>
 				<form:errors path="wage"/>
 			</div>
 			<div class="main-body-text">
@@ -172,7 +172,7 @@
 			<div class="main-body-text">
 				<label>Store ID: </label>
 				<br>
-				<form:input path="storeId"/>
+				<form:input type="number" path="storeId"/>
 				<form:errors path="storeId"/>
 			</div>
 			<br>
@@ -193,7 +193,7 @@
 	    		<h3>Remove Employee by ID</h3>
 	    		<label>ID: </label>
 	    		<br>
-	    		<form:input path="eId"/>
+	    		<form:input type="number" path="eId"/>
 	    	</div>
 	    	<br>
 	    	<div>

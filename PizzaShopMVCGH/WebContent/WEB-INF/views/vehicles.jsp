@@ -37,7 +37,7 @@
 				<h3>Add A New Vehicle</h3>
 				<label>ID: </label>
 				<br>
-				<form:input path="dId"/>
+				<form:input type="number" path="dId"/>
 				<form:errors path="dId"/>
 			</div>
 			<div class="main-body-text">
@@ -49,7 +49,7 @@
 			<div class="main-body-text">
 				<label>Year: </label>
 				<br>
-				<form:input path="year"/>
+				<form:input type="number" path="year"/>
 				<form:errors path="year"/>
 			</div>
 			<div class="main-body-text">
@@ -67,7 +67,7 @@
 			<div class="main-body-text">
 				<label>Driver ID: </label>
 				<br>
-				<form:input path="driverId"/>
+				<form:input type="number" path="driverId"/>
 				<form:errors path="driverId"/>
 			</div>
 			<br>
@@ -88,7 +88,7 @@
 	    		<h3>Get Vehicle by ID to View Info</h3>
 	    		<label>ID: </label>
 	    		<br>
-	    		<form:input path="dId"/>
+	    		<form:input type="number" path="dId"/>
 	    	</div>
 	    	<br>
     		<div>
@@ -106,7 +106,7 @@
 				<h3>Update an Existing Vehicle</h3>
 				<label>ID: </label>
 				<br>
-				<form:input path="dId"/>
+				<form:input type="number" path="dId"/>
 				<form:errors path="dId"/>
 			</div>
 			<div class="main-body-text">
@@ -118,7 +118,7 @@
 			<div class="main-body-text">
 				<label>Year: </label>
 				<br>
-				<form:input path="year"/>
+				<form:input type="number" path="year"/>
 				<form:errors path="year"/>
 			</div>
 			<div class="main-body-text">
@@ -136,7 +136,7 @@
 			<div class="main-body-text">
 				<label>Driver ID: </label>
 				<br>
-				<form:input path="driverId"/>
+				<form:input type="number" path="driverId"/>
 				<form:errors path="driverId"/>
 			</div>
 			<br>
@@ -157,7 +157,7 @@
 	    		<h3>Remove Vehicle by ID</h3>
 	    		<label>ID: </label>
 	    		<br>
-	    		<form:input path="dId"/>
+	    		<form:input type="number" path="dId"/>
 	    	</div>
 	    	<br>
 	    	<div>

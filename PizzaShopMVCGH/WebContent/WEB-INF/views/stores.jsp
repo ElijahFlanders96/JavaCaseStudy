@@ -37,7 +37,7 @@
 				<h3>Add A New Store</h3>
 				<label>ID: </label>
 				<br>
-				<form:input path="sId"/>
+				<form:input type="number" path="sId"/>
 				<form:errors path="sId"/>
 			</div>
 			<div class="main-body-text">
@@ -55,7 +55,7 @@
 			<div class="main-body-text">
 				<label>General Manager ID: </label>
 				<br>
-				<form:input path="gmId"/>
+				<form:input type="number" path="gmId"/>
 				<form:errors path="gmId"/>
 			</div>
 			<br>
@@ -75,7 +75,7 @@
 	    		<h3>Get Store by ID to View Info</h3>
 	    		<label>ID: </label>
 	    		<br>
-	    		<form:input path="sId"/>
+	    		<form:input type="number" path="sId"/>
 	    	</div>
 	    	<br>
     		<div>
@@ -93,7 +93,7 @@
 				<h3>Update an Existing Store</h3>
 				<label>ID: </label>
 				<br>
-				<form:input path="sId"/>
+				<form:input type="number" path="sId"/>
 				<form:errors path="sId"/>
 			</div>
 			<div class="main-body-text">
@@ -111,7 +111,7 @@
 			<div class="main-body-text">
 				<label>General Manager ID: </label>
 				<br>
-				<form:input path="gmId"/>
+				<form:input type="number" path="gmId"/>
 				<form:errors path="gmId"/>
 			</div>
 			<br>
@@ -131,7 +131,7 @@
 	    		<h3>Remove Store by ID</h3>
 	    		<label>ID: </label>
 	    		<br>
-	    		<form:input path="sId"/>
+	    		<form:input type="number" path="sId"/>
 	    	</div>
 	    	<br>
 	    	<div>
@@ -147,7 +147,7 @@
 	    		<h3>View All Employees Based on Store ID: </h3>
 	    		<label>ID: </label>
 	    		<br>
-	    		<form:input path="sId"/>
+	    		<form:input type="number" path="sId"/>
 	    	</div>
 	    	<br>
 	    	<div>
@@ -167,7 +167,7 @@
 	    		<h3>View All Equipment Based on Store ID: </h3>
 	    		<label>ID: </label>
 	    		<br>
-	    		<form:input path="sId"/>
+	    		<form:input type="number" path="sId"/>
 	    	</div>
 	    	<br>
 	    	<div>
