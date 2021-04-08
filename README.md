@@ -14,12 +14,16 @@
 ## Description
 This application is designed for employers of a pizza franchise to keep updated on employee, store, vehicle, and equipment information.
 
+![App in browser](./WebContent/resources/images/pizzaShopWelcome.png)
+
 ## User Stories
 - As an employer for a pizza franchise, I want a management system so that I can manage store, employee, vehicle, and equipment information
 -	As an employer for a pizza franchise, I want to ensure that only general managers have access to this application, so that not anyone can access or edit the information in the system
 -	As an employer, I want to be able to add, remove and update employees, stores, vehicles, and equipment in the system so that the information I have on my business can easily stay up to date
 -	As an employer, I want to be able to view information for all employees, stores, vehicles, and equipment so that I can ensure that it is accurate
 -	As an employer, I want to be able to view employees and equipment based on what store they are associated with, so that I can better assess the needs of each store
+
+![App in browser](./WebContent/resources/images/pizzaShopStores.png)
 
 ## Tools/Technologies
 This is a dynamic Spring MVC application that runs on Apache Tomcat port 8080. The app uses JPA to communicate with a MYSQL database, and has DAO classes that allow you to perform CRUD operations, tested by JUnit. All of the front-end is produced with JSP files.
