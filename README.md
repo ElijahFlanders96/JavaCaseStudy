@@ -27,6 +27,9 @@ This application is designed for employers of a pizza franchise to keep updated 
 
 ## Tools/Technologies
 This is a dynamic Spring MVC application that runs on Apache Tomcat port 8080. The app uses JPA to communicate with a MYSQL database, and has DAO classes that allow you to perform CRUD operations, tested by JUnit. All of the front-end is produced with JSP files.
+
+![Schema diagram](./PizzaShopMVCGH/WebContent/resources/images/pizzaShopSchema.png)
+
 ## Installation Instructions
 Make sure you have an IDE that can run Spring MVC applications and Apache Tomcat v9
 
@@ -41,6 +44,7 @@ All dao CRUD methods are tested with Junit, and they all pass. You can run them 
 
 ## Obstacles
 This was my first Spring MVC project, so there was definitely a learning curve for working with the controllers, JSP, and getting data to load onto the page at times. It was also my first time working with session management, but once I figured out how to log in as a user, I was able to figure out how to log out with no errors on my first attempt. Finally, setting up relationships in the database broke my app in ways I wasn't anticipating, so I had to add several new methods to my DAO that add and remove employees and machinery from their respective store lists, and call those methods in the controller in the right spots.
+
 ## Questions?
 Contact the author for further inquiries!<br>
 Github link: (https://github.com/elijahflanders96)<br>
