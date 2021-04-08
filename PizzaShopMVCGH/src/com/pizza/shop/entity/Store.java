@@ -97,7 +97,7 @@ public class Store {
 	// Overriding the toString() method to format it how I want it to be formatted
 	@Override
 	public String toString() {
-		return String.format("ID: %-20s Name: %-20s Address: %-20s gmId: %-20s", sId, name, address, gmId);
+		return String.format("ID: %-20s, Name: %-20s, Address: %-20s, gmId: %-20s", sId, name, address, gmId);
 	}
 	
 	// Overriding the equals() method so that the test cases evaluate the values of the objects instead of their position in the heap

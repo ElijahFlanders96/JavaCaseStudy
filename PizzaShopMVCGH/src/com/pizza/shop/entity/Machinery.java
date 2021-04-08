@@ -81,7 +81,7 @@ public class Machinery {
 	// Overriding the toString() method to format it how I want it to be formatted
 	@Override
 	public String toString() {
-		return String.format("\nID: %-20s Name: %-20s Status: %-20s Replacement Cost: %-20s\n", mId, name, status, replacementCost);
+		return String.format("\nID: %-20s, Name: %-20s, Status: %-20s, Replacement Cost: %-20s, Store ID: %-20s\n", mId, name, status, replacementCost, storeId);
 	}
 	
 	// Overriding the equals() method so that the test cases evaluate the values of the objects instead of their position in the heap

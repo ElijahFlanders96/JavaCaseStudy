@@ -90,7 +90,7 @@ public class DriverVehicle {
 	// Overriding the toString() method to format it how I want it to be formatted
 	@Override
 	public String toString() {
-		return String.format("ID: %-20s Model: %-20s Year: %-20s Color: %-20s Insurance Provider: %-20s Driver ID: %-20s", dId, model, year, color, insuranceProvider, driverId);
+		return String.format("ID: %-20s, Model: %-20s, Year: %-20s, Color: %-20s, Insurance Provider: %-20s, Driver ID: %-20s", dId, model, year, color, insuranceProvider, driverId);
 	}
 	
 	// Overriding the equals() method so that the test cases evaluate the values of the objects instead of their position in the heap
