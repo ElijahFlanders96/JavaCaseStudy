@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.pizza.shop.constants.Constants;
 import com.pizza.shop.entity.DriverVehicle;
 import com.pizza.shop.entity.Employee;
 import com.pizza.shop.entity.Machinery;
@@ -25,11 +26,10 @@ import com.pizza.shop.service.DriverVehicleService;
 import com.pizza.shop.service.EmployeeService;
 import com.pizza.shop.service.MachineryService;
 import com.pizza.shop.service.StoreService;
-import com.pizza.shop.utilizes.Utilizes;
 
 // Controller class. This class handles all requests from a user on the app
 @Controller
-public class HomeController extends Utilizes {
+public class HomeController extends Constants {
 	
 	private EmployeeService empService;
 	private StoreService storeService;

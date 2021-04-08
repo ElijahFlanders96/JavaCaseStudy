@@ -1,6 +1,6 @@
-package com.pizza.shop.utilizes;
+package com.pizza.shop.constants;
 
-public class Utilizes {
+public class Constants {
 	protected static String welcome = "welcome";
 	protected static String employees = "employees";
 	protected static String equipment = "equipment";
