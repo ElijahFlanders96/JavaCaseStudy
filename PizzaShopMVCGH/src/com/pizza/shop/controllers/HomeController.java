@@ -86,7 +86,8 @@ public class HomeController extends Constants {
 	
 	// routes to the Login page
 	@GetMapping("/login")
-	public String showLoginPage() {
+	public String showLoginPage(Model model) {
+		model.addAttribute("employee", new Employee());
 		return login;
 	}
 	
@@ -102,9 +103,12 @@ public class HomeController extends Constants {
 	// login functionality
 	// this method allows general managers to login. General managers are the only employee type that can access the features of this app
 	@PostMapping("/login")
-	public String processLoginRequest(@RequestParam("eId") int eId, @RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) {
-		Employee emp = empService.getEmpService(eId);
-		if (emp!=null && emp.getPosition().equals("General Manager") && email.equals(emp.getEmail()) && password.equals(emp.getPassword())) {
+	public String processLoginRequest(@ModelAttribute("employee") Employee emp, @RequestParam("eId") int eId, @RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) {
+		emp = empService.getEmpService(eId);
+		if (eId==0) {
+			model.addAttribute("nullID", "the ID field cannot be null");
+			return login;
+		} else if (emp!=null && emp.getPosition().equals("General Manager") && email.equals(emp.getEmail()) && password.equals(emp.getPassword())) {
 			session.setAttribute("currentUser", emp);
 			model.addAttribute("loginSuccessMessage", "Welcome,");
 			return login;
