@@ -40,13 +40,4 @@ public class MachineryService {
 	public void removeMacService(int mId) {
 		macD.removeMac(mId);
 	}
-//	public boolean validateMacService(int mId, String name, int storeId) {
-//		Machinery macFound = macD.getMac(mId);
-//		if (macFound!=null) {
-//			if (macFound.getName().equals(name) && macFound.getStoreId() == storeId) {
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
 }

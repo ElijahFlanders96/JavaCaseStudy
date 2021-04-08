@@ -41,13 +41,4 @@ public class EmployeeService {
 		empD.removeEmp(eId);
 	}
 	
-//	public boolean validateEmpService(int eId, String firstName, String lastName, String email, String password, String phoneNumber, int storeId) {
-//		Employee empFound = empD.getEmp(eId);
-//		if (empFound!=null) {
-//			if(empFound.getFirstName().equals(firstName) && empFound.getLastName().equals(lastName) && empFound.getEmail().equals(email) && empFound.getPassword().equals(password) && empFound.getPhoneNumber().equals(phoneNumber) && empFound.getStoreId() == storeId) {
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
 }

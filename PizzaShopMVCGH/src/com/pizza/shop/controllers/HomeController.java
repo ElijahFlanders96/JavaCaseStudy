@@ -208,6 +208,11 @@ public class HomeController extends Utilizes {
 	public String updateEmployee(@ModelAttribute("employee") Employee emp, Model model, BindingResult result, HttpSession session) {
 		Object loggedIn = session.getAttribute("currentUser");
 		int eId = emp.geteId();
+		List<Employee> empList = empService.getAllEmpService();
+		List<Integer> empIds = new ArrayList<Integer>();
+		for (Employee e : empList) {
+			empIds.add(e.geteId());
+		}
 		if (result.hasErrors()) {
 			model.addAttribute("updateEmpError", "There was an error with an input field, please try again");
 			return employees;
@@ -219,6 +224,14 @@ public class HomeController extends Utilizes {
 			try {
 				throw new NoZeroException("0 is not a vailid ID");
 			} catch (NoZeroException e) {
+				e.printStackTrace();
+			}
+			return employees;
+		} else if (empIds.contains(eId)) {
+			model.addAttribute("updateEmpNoDuplicate", "ID already exists under another employee");
+			try {
+				throw new NoDuplicateException("ID already exists under another employee");
+			} catch (NoDuplicateException e) {
 				e.printStackTrace();
 			}
 			return employees;
@@ -279,6 +292,11 @@ public class HomeController extends Utilizes {
 		public String addNewStore(@ModelAttribute("store") Store store, Model model, BindingResult result, HttpSession session) {
 			Object loggedIn = session.getAttribute("currentUser");
 			int sId = store.getsId();
+			List<Store> storeList = storeService.getAllStoreService();
+			List<Integer> storeIds = new ArrayList<Integer>();
+			for (Store s : storeList) {
+				storeIds.add(s.getsId());
+			}
 			if (result.hasErrors()) {
 				model.addAttribute("addStoreError", "There was an error with an input field, please try again");
 				return stores;
@@ -293,6 +311,14 @@ public class HomeController extends Utilizes {
 					e.printStackTrace();
 				}
 				return stores;
+			} else if (storeIds.contains(sId)) {
+				model.addAttribute("addStoreNoDuplicate", "ID already exists under another employee");
+				try {
+					throw new NoDuplicateException("ID already exists under another employee");
+				} catch (NoDuplicateException e) {
+					e.printStackTrace();
+				}
+				return employees;
 			} else {
 				int eId = store.getGmId();
 				Employee emp = empService.getEmpService(eId);
@@ -328,6 +354,11 @@ public class HomeController extends Utilizes {
 		public String updateStore(@ModelAttribute("store") Store store, Model model, BindingResult result, HttpSession session) {
 			Object loggedIn = session.getAttribute("currentUser");
 			int sId = store.getsId();
+			List<Store> storeList = storeService.getAllStoreService();
+			List<Integer> storeIds = new ArrayList<Integer>();
+			for (Store s : storeList) {
+				storeIds.add(s.getsId());
+			}
 			if (result.hasErrors()) {
 				model.addAttribute("updateStoreError", "There was an error with an input field, please try again");
 				return stores;
@@ -342,6 +373,14 @@ public class HomeController extends Utilizes {
 					e.printStackTrace();
 				}
 				return stores;
+			} else if (storeIds.contains(sId)) {
+				model.addAttribute("updateStoreNoDuplicate", "ID already exists under another employee");
+				try {
+					throw new NoDuplicateException("ID already exists under another employee");
+				} catch (NoDuplicateException e) {
+					e.printStackTrace();
+				}
+				return employees;
 			} else {
 				storeService.updateStoreService(store);
 				model.addAttribute("updateStoreSuccess", "Store updated successfully!");
@@ -415,6 +454,11 @@ public class HomeController extends Utilizes {
 			int dId = car.getdId();
 			int eId = car.getDriverId();
 			Employee driver = empService.getEmpService(eId);
+			List<DriverVehicle> carList = carService.getAllCarService();
+			List<Integer> carIds = new ArrayList<Integer>();
+			for (DriverVehicle d : carList) {
+				carIds.add(d.getdId());
+			}
 			if (result.hasErrors()) {
 				model.addAttribute("addCarError", "There was an error with an input field, please try again");
 				return vehicles;
@@ -432,6 +476,14 @@ public class HomeController extends Utilizes {
 					e.printStackTrace();
 				}
 				return vehicles;
+			} else if (carIds.contains(dId)) {
+				model.addAttribute("addCarNoDuplicate", "ID already exists under another employee");
+				try {
+					throw new NoDuplicateException("ID already exists under another employee");
+				} catch (NoDuplicateException e) {
+					e.printStackTrace();
+				}
+				return employees;
 			} else {
 				carService.addCarService(car);
 				model.addAttribute("addCarSuccess", "Vehicle added to the database successfully!");
@@ -465,6 +517,11 @@ public class HomeController extends Utilizes {
 			int dId = car.getdId();
 			int eId = car.getDriverId();
 			Employee driver = empService.getEmpService(eId);
+			List<DriverVehicle> carList = carService.getAllCarService();
+			List<Integer> carIds = new ArrayList<Integer>();
+			for (DriverVehicle d : carList) {
+				carIds.add(d.getdId());
+			}
 			if (result.hasErrors()) {
 				model.addAttribute("updateCarError", "There was an error with an input field, please try again");
 				return vehicles;
@@ -482,6 +539,14 @@ public class HomeController extends Utilizes {
 					e.printStackTrace();
 				}
 				return vehicles;
+			} else if (carIds.contains(dId)) {
+				model.addAttribute("updateCarNoDuplicate", "ID already exists under another employee");
+				try {
+					throw new NoDuplicateException("ID already exists under another employee");
+				} catch (NoDuplicateException e) {
+					e.printStackTrace();
+				}
+				return employees;
 			} else {
 				carService.updateCarService(car);
 				model.addAttribute("updateCarSuccess", "Vehicle updated successfully!");
@@ -528,6 +593,11 @@ public class HomeController extends Utilizes {
 		public String addNewMac(@ModelAttribute("machinery") Machinery mac, Model model, BindingResult result, HttpSession session) {
 			Object loggedIn = session.getAttribute("currentUser");
 			int mId = mac.getmId();
+			List<Machinery> macList = macService.getAllMacService();
+			List<Integer> macIds = new ArrayList<Integer>();
+			for (Machinery m : macList) {
+				macIds.add(m.getmId());
+			}
 			if (result.hasErrors()) {
 				model.addAttribute("addMacError", "There was an error with an input field, please try again");
 				return equipment;
@@ -545,6 +615,14 @@ public class HomeController extends Utilizes {
 					e.printStackTrace();
 				}
 				return equipment;
+			} else if (macIds.contains(mId)) {
+				model.addAttribute("addMacNoDuplicate", "ID already exists under another employee");
+				try {
+					throw new NoDuplicateException("ID already exists under another employee");
+				} catch (NoDuplicateException e) {
+					e.printStackTrace();
+				}
+				return employees;
 			} else {
 				int sId = mac.getStoreId();
 				Store store = storeService.getStoreService(sId);
@@ -584,6 +662,11 @@ public class HomeController extends Utilizes {
 		public String updateMac(@ModelAttribute("machinery") Machinery mac, Model model, BindingResult result, HttpSession session) {
 			Object loggedIn = session.getAttribute("currentUser");
 			int mId = mac.getmId();
+			List<Machinery> macList = macService.getAllMacService();
+			List<Integer> macIds = new ArrayList<Integer>();
+			for (Machinery m : macList) {
+				macIds.add(m.getmId());
+			}
 			if (result.hasErrors()) {
 				model.addAttribute("updateMacError", "There was an error with an input field, please try again");
 				return equipment;
@@ -601,6 +684,14 @@ public class HomeController extends Utilizes {
 					e.printStackTrace();
 				}
 				return equipment;
+			} else if (macIds.contains(mId)) {
+				model.addAttribute("updateMacNoDuplicate", "ID already exists under another employee");
+				try {
+					throw new NoDuplicateException("ID already exists under another employee");
+				} catch (NoDuplicateException e) {
+					e.printStackTrace();
+				}
+				return employees;
 			} else {
 				int sId = mac.getStoreId();
 				Store store = storeService.getStoreService(sId);

@@ -74,6 +74,7 @@
 			<div>
 		      <input type="submit" value="Add Vehicle" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${addCarNoDuplicate}</h3>
 		    <h3 class="main-body-text">${addCarNoZero}</h3>
 		    <h3 class="main-body-text">${addCarEmpError}</h3>
 		    <h3 class="main-body-text">${addCarSessionError}</h3>
@@ -142,6 +143,7 @@
 			<div>
 		      <input type="submit" value="Update Vehicle" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${updateCarNoDuplicate}</h3>
 		    <h3 class="main-body-text">${updateCarNoZero}</h3>
 		    <h3 class="main-body-text">${updateCarEmpError}</h3>
 		    <h3 class="main-body-text">${updateCarSessionError}</h3>

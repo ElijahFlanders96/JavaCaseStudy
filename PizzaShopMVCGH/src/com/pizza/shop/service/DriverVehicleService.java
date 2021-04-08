@@ -40,13 +40,4 @@ public class DriverVehicleService {
 	public void removeCarService(int dId) {
 		carD.removeCar(dId);
 	}
-//	public boolean validateCarService(int dId, String model, int year, String color, String insuranceProvider, int driverId) {
-//		DriverVehicle carFound = carD.getCar(dId);
-//		if (carFound!=null) {
-//			if (carFound.getModel().equals(model) && carFound.getYear() == year && carFound.getColor().equals(color) && carFound.getInsuranceProvider().equals(insuranceProvider) && carFound.getDriverId() == driverId) {
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
 }

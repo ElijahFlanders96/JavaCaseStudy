@@ -62,6 +62,7 @@
 			<div>
 		      <input type="submit" value="Add Store" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${addStoreNoDuplicate}</h3>
 		    <h3 class="main-body-text">${addStoreNoZero}</h3>
 		    <h3 class="main-body-text">${addStoreSessionError}</h3>
 		   	<h3 class="main-body-text">${addStoreError}</h3>
@@ -117,6 +118,7 @@
 			<div>
 		      <input type="submit" value="Update Store" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${updateStoreNoDuplicate}</h3>
 		    <h3 class="main-body-text">${updateStoreNoZero}</h3>
 		    <h3 class="main-body-text">${updateStoreSessionError}</h3>
 		   	<h3 class="main-body-text">${updateStoreError}</h3>

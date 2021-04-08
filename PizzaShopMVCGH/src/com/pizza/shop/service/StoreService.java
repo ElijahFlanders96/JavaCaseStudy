@@ -66,13 +66,5 @@ public class StoreService {
 	public List<Machinery> viewAllMacService(int sId) {
 		return storeD.viewAllMac(sId);
 	}
-//	public boolean validateStoreService(int sId, String name, String address) {
-//		Store storeFound = storeD.getStore(sId);
-//		if (storeFound!=null) {
-//			if (storeFound.getName().equals(name) && storeFound.getAddress().equals(address)) {
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
+
 }

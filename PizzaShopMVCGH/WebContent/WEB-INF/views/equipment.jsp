@@ -72,6 +72,7 @@
 			<div>
 		      <input type="submit" value="Add Equipment" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${addMacNoDuplicate}</h3>
 		    <h3 class="main-body-text">${addMacNoZero}</h3>
 		    <h3 class="main-body-text">${addMacStatusError}</h3>
 		    <h3 class="main-body-text">${addMacStoreError}</h3>
@@ -135,6 +136,7 @@
 			<div>
 		      <input type="submit" value="Update Equipment" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${updateMacNoDuplicate}</h3>
 		    <h3 class="main-body-text">${updateMacNoZero}</h3>
 		    <h3 class="main-body-text">${updateMacStoreError}</h3>
 		    <h3 class="main-body-text">${updateMacStatusError}</h3>
