@@ -10,9 +10,12 @@ import com.pizza.shop.dbConnection.DBConnection;
 import com.pizza.shop.entity.DriverVehicle;
 import com.pizza.shop.entity.Employee;
 
+//The DriverVehicleDao class defines all of the methods in the DriverVehicleDaoI
+//Here, I write the code that communicates with my database to perform CRUD functionality
 @Repository
 public class DriverVehicleDao extends DBConnection implements DriverVehicleDaoI {
 
+	// Adds a vehicle to the database (CREATE)
 	@Override
 	public boolean addCar(DriverVehicle car) {
 		try {
@@ -28,6 +31,7 @@ public class DriverVehicleDao extends DBConnection implements DriverVehicleDaoI 
 		return false;
 	}
 
+	// Retrieves a vehicle from the database (READ)
 	@Override
 	public DriverVehicle getCar(int dId) {
 		this.connect();
@@ -36,6 +40,7 @@ public class DriverVehicleDao extends DBConnection implements DriverVehicleDaoI 
 		return carFound;
 	}
 
+	// Updates a vehicle in the database (UPDATE)
 	@Override
 	public boolean updateCar(DriverVehicle car) {
 		try {
@@ -56,6 +61,7 @@ public class DriverVehicleDao extends DBConnection implements DriverVehicleDaoI 
 		return false;
 	}
 
+	// Removes a vehicle from the database (DELETE)
 	@Override
 	public boolean removeCar(int dId) {
 		try {
@@ -72,6 +78,7 @@ public class DriverVehicleDao extends DBConnection implements DriverVehicleDaoI 
 		return false;
 	}
 
+	// Retrieves a list of all vehicles in the database
 	@Override
 	public List<DriverVehicle> getAllCar() {
 		this.connect();

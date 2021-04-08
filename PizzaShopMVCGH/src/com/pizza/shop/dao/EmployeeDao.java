@@ -9,9 +9,12 @@ import org.springframework.stereotype.Repository;
 import com.pizza.shop.dbConnection.DBConnection;
 import com.pizza.shop.entity.Employee;
 
+// The EmployeeDao class defines all of the methods in the EmployeeDaoI
+// Here, I write the code that communicates with my database to perform CRUD functionality
 @Repository
 public class EmployeeDao extends DBConnection implements EmployeeDaoI {
 
+	// Adds an employee to the database (CREATE)
 	@Override
 	public boolean addEmp(Employee emp) {
 		try {
@@ -27,6 +30,7 @@ public class EmployeeDao extends DBConnection implements EmployeeDaoI {
 		return false;
 	}
 
+	// Retrieves and employee from the database (READ)
 	@Override
 	public Employee getEmp(int eId) {
 		this.connect();
@@ -35,6 +39,7 @@ public class EmployeeDao extends DBConnection implements EmployeeDaoI {
 		return empFound;
 	}
 
+	// Updates an employee in the database (UPDATE)
 	@Override
 	public boolean updateEmp(Employee emp) {
 		try {
@@ -58,6 +63,7 @@ public class EmployeeDao extends DBConnection implements EmployeeDaoI {
 		return false;
 	}
 
+	// Removes an employee from the database (DELETE)
 	@Override
 	public boolean removeEmp(int eId) {
 		try {
@@ -74,6 +80,7 @@ public class EmployeeDao extends DBConnection implements EmployeeDaoI {
 		return false;
 	}
 
+	// Retrieves a list of all employees in the database
 	@Override
 	public List<Employee> getAllEmp() {
 		this.connect();

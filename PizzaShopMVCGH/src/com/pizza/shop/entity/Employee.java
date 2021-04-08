@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+// Code for the Entity class / table in my database complete with constructors, getters, and setters
 @Entity(name="Employee")
 @Table(name="Employee")
 public class Employee {
@@ -119,12 +120,13 @@ public class Employee {
 		this.storeId = storeId;
 	}
 
+	// Overriding the toString() method to format it how I want it to be formatted
 	@Override
 	public String toString() {
-		// need to fill out the first argument, need to figure out how and don't want to rn
 		return String.format("\nID: %-20s Name: %-20s %-20s Wage: %-20s Position: %-20s Email: %-20s Phone Number: %-20s Store ID: %-20s\n", eId, firstName, lastName, wage, position, email, phoneNumber, storeId);
 	}
 	
+	// Overriding the equals() method so that the test cases evaluate the values of the objects instead of their position in the heap
 	@Override
 	public boolean equals(Object o) {
 		Employee comparedTo = (Employee) o;

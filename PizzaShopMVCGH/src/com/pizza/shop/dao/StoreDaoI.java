@@ -6,6 +6,7 @@ import com.pizza.shop.entity.Employee;
 import com.pizza.shop.entity.Machinery;
 import com.pizza.shop.entity.Store;
 
+//Interface for the StoreDao - asserts what methods will need to be defined
 public interface StoreDaoI {
 	public boolean addStore(Store store);
 	public Store getStore(int sId);

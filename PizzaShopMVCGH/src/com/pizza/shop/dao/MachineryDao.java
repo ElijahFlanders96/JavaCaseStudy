@@ -9,9 +9,12 @@ import org.springframework.stereotype.Repository;
 import com.pizza.shop.dbConnection.DBConnection;
 import com.pizza.shop.entity.Machinery;
 
+//The MachineryDao class defines all of the methods in the McahineryDaoI
+//Here, I write the code that communicates with my database to perform CRUD functionality
 @Repository
 public class MachineryDao extends DBConnection implements MachineryDaoI {
 
+	// Adds machienry to the database (CREATE)
 	@Override
 	public boolean addMac(Machinery mac) {
 		try {
@@ -27,6 +30,7 @@ public class MachineryDao extends DBConnection implements MachineryDaoI {
 		return false;
 	}
 
+	// Retrieves machinery from the database (READ)
 	@Override
 	public Machinery getMac(int mId) {
 		this.connect();
@@ -35,6 +39,7 @@ public class MachineryDao extends DBConnection implements MachineryDaoI {
 		return macFound;
 	}
 
+	// Updates machinery in the database (UPDATE)
 	@Override
 	public boolean updateMac(Machinery mac) {
 		try {
@@ -54,6 +59,7 @@ public class MachineryDao extends DBConnection implements MachineryDaoI {
 		return false;
 	}
 
+	// Removes machinery from the database (DELETE)
 	@Override
 	public boolean removeMac(int mId) {
 		try {
@@ -70,6 +76,7 @@ public class MachineryDao extends DBConnection implements MachineryDaoI {
 		return false;
 	}
 
+	// Retrieves a liast of all machinery in the database
 	@Override
 	public List<Machinery> getAllMac() {
 		this.connect();

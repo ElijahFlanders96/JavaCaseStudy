@@ -1,5 +1,6 @@
 package com.pizza.shop.controllers;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import com.pizza.shop.entity.DriverVehicle;
 import com.pizza.shop.entity.Employee;
 import com.pizza.shop.entity.Machinery;
 import com.pizza.shop.entity.Store;
+import com.pizza.shop.exceptions.NoDuplicateException;
 import com.pizza.shop.exceptions.NoZeroException;
 import com.pizza.shop.service.DriverVehicleService;
 import com.pizza.shop.service.EmployeeService;
@@ -135,6 +137,11 @@ public class HomeController extends Utilizes {
 	public String addNewEmployee(@ModelAttribute("employee") Employee emp, Model model, BindingResult result, HttpSession session) {
 		Object loggedIn = session.getAttribute("currentUser");
 		int eId = emp.geteId();
+		List<Employee> empList = empService.getAllEmpService();
+		List<Integer> empIds = new ArrayList<Integer>();
+		for (Employee e : empList) {
+			empIds.add(e.geteId());
+		}
 		if (result.hasErrors()) {
 			model.addAttribute("errorMessage", "There was an error with an input field, please try again");
 			return employees;
@@ -146,6 +153,14 @@ public class HomeController extends Utilizes {
 			try {
 				throw new NoZeroException("0 is not a vailid ID");
 			} catch (NoZeroException e) {
+				e.printStackTrace();
+			}
+			return employees;
+		} else if (empIds.contains(eId)) {
+			model.addAttribute("addEmpNoDuplicate", "ID already exists under another employee");
+			try {
+				throw new NoDuplicateException("ID already exists under another employee");
+			} catch (NoDuplicateException e) {
 				e.printStackTrace();
 			}
 			return employees;

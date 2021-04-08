@@ -11,13 +11,9 @@ import com.pizza.shop.entity.DriverVehicle;
 import com.pizza.shop.entity.Employee;
 import com.pizza.shop.entity.Machinery;
 import com.pizza.shop.entity.Store;
-import com.pizza.shop.service.StoreService;
 
-//import java.util.Scanner;
-
+// I used this class to populate my database with values, using JPA
 public class PizzaShopAppMain {
-	
-//	public static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		

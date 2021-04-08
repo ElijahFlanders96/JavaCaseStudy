@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+// Code for the Entity class / table in my database complete with constructors, getters, and setters
 @Entity(name="Store")
 @Table(name="Store")
 public class Store {
@@ -23,6 +24,9 @@ public class Store {
 	private String address;
 	@Column
 	private int gmId;
+	// Establishing a relationship between the store table and the employee and machinery table in the database
+	// Each store will have a list of employees and machinery associated with that store via the store ID
+	// FetchType.EAGER allows me to grab lists from the database and display it on the front end
 	@OneToMany(targetEntity=Employee.class, fetch=FetchType.EAGER)
 	private List<Employee> empList;
 	@OneToMany(targetEntity=Machinery.class, fetch=FetchType.EAGER)
@@ -90,12 +94,13 @@ public class Store {
 		this.macList = macList;
 	}
 
+	// Overriding the toString() method to format it how I want it to be formatted
 	@Override
 	public String toString() {
-		// need to fill out the first argument, need to figure out how and don't want to rn
 		return String.format("ID: %-20s Name: %-20s Address: %-20s gmId: %-20s", sId, name, address, gmId);
 	}
 	
+	// Overriding the equals() method so that the test cases evaluate the values of the objects instead of their position in the heap
 	@Override
 	public boolean equals(Object o) {
 		Store comparedTo = (Store) o;

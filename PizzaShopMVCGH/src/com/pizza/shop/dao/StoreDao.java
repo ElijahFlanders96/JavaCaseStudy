@@ -11,9 +11,12 @@ import com.pizza.shop.entity.Employee;
 import com.pizza.shop.entity.Machinery;
 import com.pizza.shop.entity.Store;
 
+//The StoreDao class defines all of the methods in the StoreDaoI
+//Here, I write the code that communicates with my database to perform CRUD functionality
 @Repository
 public class StoreDao extends DBConnection implements StoreDaoI {
 
+	// Adds a store to the database (CREATE)
 	@Override
 	public boolean addStore(Store store) {
 		try {
@@ -29,6 +32,7 @@ public class StoreDao extends DBConnection implements StoreDaoI {
 		return false;
 	}
 
+	// Retrieves a store from the database (READ)
 	@Override
 	public Store getStore(int sId) {
 		this.connect();
@@ -37,6 +41,7 @@ public class StoreDao extends DBConnection implements StoreDaoI {
 		return storeFound;
 	}
 
+	// Updates a store in the database (UPDATE)
 	@Override
 	public boolean updateStore(Store store) {
 		try {
@@ -55,6 +60,7 @@ public class StoreDao extends DBConnection implements StoreDaoI {
 		return false;
 	}
 
+	// Removes a store from the database (DELETE)
 	@Override
 	public boolean removeStore(int sId) {
 		try {
@@ -71,6 +77,7 @@ public class StoreDao extends DBConnection implements StoreDaoI {
 		return false;
 	}
 
+	// Retrieves a list of all stores in the database
 	@Override
 	public List<Store> getAllStore() {
 		this.connect();
@@ -79,6 +86,11 @@ public class StoreDao extends DBConnection implements StoreDaoI {
 		return stores;
 	}
 	
+	// These next methods deviate from standard CRUD functionality
+	// These methods define how the relationship between Store and Employee and Machinery operate via the database
+	
+	// Adds an employee to a store's empList
+	// Called when an employee is added to the database, or if an employee is updated and has a modified store ID
 	@Override
 	public void addEmpToStore(int eId, int sId) {
 		this.connect();
@@ -91,6 +103,8 @@ public class StoreDao extends DBConnection implements StoreDaoI {
 		this.disconnect();
 	}
 
+	// Adds machinery to a store's macList
+	// Called when machinery is added to the database, or if machinery is updated and has a modified store ID
 	@Override
 	public void addMacToStore(int mId, int sId) {
 		this.connect();
@@ -103,6 +117,8 @@ public class StoreDao extends DBConnection implements StoreDaoI {
 		this.disconnect();
 	}
 	
+	// Removes an employee from a store's empList
+	// Called when an employee is removed from the database, or when an employee is updated with a modified store ID
 	@Override
 	public void removeEmpFromStore(int eId, int sId) {
 		this.connect();
@@ -115,6 +131,8 @@ public class StoreDao extends DBConnection implements StoreDaoI {
 		this.disconnect();
 	}
 
+	// Removes machinery from a store's macList
+	// Called when machinery is removed from the database, or when machinery is updated with a modified store ID
 	@Override
 	public void removeMacFromStore(int mId, int sId) {
 		this.connect();
@@ -127,11 +145,13 @@ public class StoreDao extends DBConnection implements StoreDaoI {
 		this.disconnect();
 	}
 
+	// Retrieves a list of all employees that share a store ID
 	@Override
 	public List<Employee> viewAllEmp(int sId) {
 		return this.getStore(sId).getEmpList();
 	}
 
+	// Retrieves a list of all machinery that shares a store ID
 	@Override
 	public List<Machinery> viewAllMac(int sId) {
 		return this.getStore(sId).getMacList();
