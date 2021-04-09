@@ -31,7 +31,7 @@
 			<h3 class="main-body-text">${viewMacSessionError}</h3>
 			<div class="main-body-text" >
 				<c:forEach items = "${macList}" var="mac">
-					<h5><c:out value="${mac}"/><h5>
+					<h5><c:out value="${mac}"/></h5>
 				</c:forEach>
 			</div>
 		</form:form>
@@ -59,7 +59,7 @@
 			<div class="main-body-text">
 				<label>Replacement Cost: </label>
 				<br>
-				<form:input type="number" path="replacementCost"/>
+				<form:input type="number" step="any" path="replacementCost"/>
 				<form:errors path="replacementCost"/>
 			</div>
 			<div class="main-body-text">
@@ -123,7 +123,7 @@
 			<div class="main-body-text">
 				<label>Replacement Cost: </label>
 				<br>
-				<form:input type="number" path="replacementCost"/>
+				<form:input type="number" step="any" path="replacementCost"/>
 				<form:errors path="replacementCost"/>
 			</div>
 			<div class="main-body-text">

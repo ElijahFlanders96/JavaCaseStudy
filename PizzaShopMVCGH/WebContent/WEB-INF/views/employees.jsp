@@ -55,7 +55,7 @@
 			<div class="main-body-text">
 				<label>Wage: </label>
 				<br>
-				<form:input type="number" path="wage"/>
+				<form:input type="number" step="any" path="wage"/>
 				<form:errors path="wage"/>
 			</div>
 			<div class="main-body-text">
@@ -92,6 +92,7 @@
 			<div>
 		      <input type="submit" value="Add Employee" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${addEmpDoubleEx}</h3>
 		    <h3 class="main-body-text">${addEmpNoDuplicate}</h3>
 		    <h3 class="main-body-text">${addEmpNoZero}</h3>
 		    <h3 class="main-body-text">${addEmpStoreError}</h3>
@@ -142,7 +143,7 @@
 			<div class="main-body-text">
 				<label>Wage: </label>
 				<br>
-				<form:input type="number" path="wage"/>
+				<form:input type="number" step="any" path="wage"/>
 				<form:errors path="wage"/>
 			</div>
 			<div class="main-body-text">
