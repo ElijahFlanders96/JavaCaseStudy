@@ -27,7 +27,7 @@
 		    <h3 class="main-body-text">${viewStoreSessionError}</h3>
 		    <div class="main-body-text" >
 				<c:forEach items = "${storeList}" var="store">
-					<h5><c:out value="${store}"/><h5>
+					<h5><c:out value="${store}"/></h5>
 				</c:forEach>
 			</div>
 		</form:form>

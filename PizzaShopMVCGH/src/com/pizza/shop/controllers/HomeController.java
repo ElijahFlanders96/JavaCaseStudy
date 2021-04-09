@@ -229,6 +229,8 @@ public class HomeController extends Constants {
 	public String updateEmployee(@ModelAttribute("employee") Employee emp, Model model, BindingResult result, HttpSession session) {
 		Object loggedIn = session.getAttribute("currentUser");
 		int eId = emp.geteId();
+		Employee empOriginal = empService.getEmpService(eId);
+		int sIdOriginal = empOriginal.getStoreId();
 		if (result.hasErrors()) {
 			model.addAttribute("updateEmpError", "There was an error with an input field, please try again");
 			return employees;
@@ -250,9 +252,9 @@ public class HomeController extends Constants {
 				model.addAttribute("updateEmpStoreError", "Please ensure that the Store ID matches the ID of an existing store");
 				return employees;
 			} else {
-				storeService.removeEmpFromStoreService(eId, sId);
-				empService.updateEmpService(emp);
+				storeService.removeEmpFromStoreService(eId, sIdOriginal);
 				storeService.addEmpToStoreService(eId, sId);
+				empService.updateEmpService(emp);
 				model.addAttribute("updateEmpSuccess", "Employee updated successfully!");
 			}
 		}
@@ -665,6 +667,8 @@ public class HomeController extends Constants {
 		public String updateMac(@ModelAttribute("machinery") Machinery mac, Model model, BindingResult result, HttpSession session) {
 			Object loggedIn = session.getAttribute("currentUser");
 			int mId = mac.getmId();
+			Machinery macOriginal = macService.getMacService(mId);
+			int sIdOriginal = macOriginal.getStoreId();
 			if (result.hasErrors()) {
 				model.addAttribute("updateMacError", "There was an error with an input field, please try again");
 				return equipment;
@@ -689,9 +693,9 @@ public class HomeController extends Constants {
 					model.addAttribute("updateMacStoreError", "Please ensure that the Store ID matches the ID of an existing store");
 					return equipment;
 				} else {
-					storeService.removeMacFromStoreService(mId, sId);
-					macService.updateMacService(mac);
+					storeService.removeMacFromStoreService(mId, sIdOriginal);
 					storeService.addMacToStoreService(mId, sId);
+					macService.updateMacService(mac);
 					model.addAttribute("updateMacSuccess", "Equipment updated successfully!");
 				}
 			}
