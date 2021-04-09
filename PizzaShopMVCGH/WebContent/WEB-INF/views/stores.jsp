@@ -118,7 +118,6 @@
 			<div>
 		      <input type="submit" value="Update Store" class="crud-btn"/>
 		    </div>
-		    <h3 class="main-body-text">${updateStoreNoDuplicate}</h3>
 		    <h3 class="main-body-text">${updateStoreNoZero}</h3>
 		    <h3 class="main-body-text">${updateStoreSessionError}</h3>
 		   	<h3 class="main-body-text">${updateStoreError}</h3>

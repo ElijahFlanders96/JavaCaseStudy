@@ -136,7 +136,6 @@
 			<div>
 		      <input type="submit" value="Update Equipment" class="crud-btn"/>
 		    </div>
-		    <h3 class="main-body-text">${updateMacNoDuplicate}</h3>
 		    <h3 class="main-body-text">${updateMacNoZero}</h3>
 		    <h3 class="main-body-text">${updateMacStoreError}</h3>
 		    <h3 class="main-body-text">${updateMacStatusError}</h3>

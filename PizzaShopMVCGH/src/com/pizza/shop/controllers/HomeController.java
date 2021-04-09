@@ -212,14 +212,14 @@ public class HomeController extends Constants {
 			return employees;
 		} else {
 			System.out.println(emp.getFirstName());
-			model.addAttribute("eId", emp.geteId() + ", ");
-			model.addAttribute("firstName", emp.getFirstName() + ", ");
+			model.addAttribute("eId", "ID: " + emp.geteId() + ", ");
+			model.addAttribute("firstName", "Name: " + emp.getFirstName() + " ");
 			model.addAttribute("lastName", emp.getLastName() + ", ");
-			model.addAttribute("wage", emp.getWage() + ", ");
-			model.addAttribute("position", emp.getPosition() + ", ");
-			model.addAttribute("email", emp.getEmail() + ", ");
-			model.addAttribute("phoneNumber", emp.getPhoneNumber() + ", ");
-			model.addAttribute("storeId", emp.getStoreId() + ", ");
+			model.addAttribute("wage", "Wage: " + emp.getWage() + ", ");
+			model.addAttribute("position", "Position: " + emp.getPosition() + ", ");
+			model.addAttribute("email", "Email: " + emp.getEmail() + ", ");
+			model.addAttribute("phoneNumber", "Phone Number: " + emp.getPhoneNumber() + ", ");
+			model.addAttribute("storeId", "Store ID: " + emp.getStoreId());
 		}
 		return employees;
 	}
@@ -355,10 +355,10 @@ public class HomeController extends Constants {
 				model.addAttribute("getStoreSessionError", "You must be logged in to view a store in the database");
 				return stores;
 			} else {
-				model.addAttribute("sId", store.getsId() + ", ");
-				model.addAttribute("name", store.getName() + ", ");
-				model.addAttribute("address", store.getAddress() + ", ");
-				model.addAttribute("gmId", store.getGmId() + ", ");
+				model.addAttribute("sId", "ID: " + store.getsId() + ", ");
+				model.addAttribute("name", "Name: " + store.getName() + ", ");
+				model.addAttribute("address", "Address: " + store.getAddress() + ", ");
+				model.addAttribute("gmId", "GM ID: " + store.getGmId());
 			}
 			return stores;
 		}
@@ -509,12 +509,12 @@ public class HomeController extends Constants {
 				model.addAttribute("getCarSessionError", "You must be logged in to view a vehicle in the database");
 				return vehicles;
 			} else {
-				model.addAttribute("dId", car.getdId() + ", ");
-				model.addAttribute("model", car.getModel() + ", ");
-				model.addAttribute("year", car.getYear() + ", ");
-				model.addAttribute("color", car.getColor() + ", ");
-				model.addAttribute("insuranceProvider", car.getInsuranceProvider() + ", ");
-				model.addAttribute("driverId", car.getDriverId() + ", ");
+				model.addAttribute("dId", "ID: " + car.getdId() + ", ");
+				model.addAttribute("model", "Model: " + car.getModel() + ", ");
+				model.addAttribute("year", "Year: " + car.getYear() + ", ");
+				model.addAttribute("color", "Color: " + car.getColor() + ", ");
+				model.addAttribute("insuranceProvider", "Insurance Provider: " + car.getInsuranceProvider() + ", ");
+				model.addAttribute("driverId", "Driver ID: " + car.getDriverId());
 			}
 			return vehicles;
 		}
@@ -651,11 +651,11 @@ public class HomeController extends Constants {
 				model.addAttribute("getMacSessionError", "You must be logged in to view equipment in the database");
 				return equipment;
 			} else {
-				model.addAttribute("mId", mac.getmId() + ", ");
-				model.addAttribute("name", mac.getName() + ", ");
-				model.addAttribute("status", mac.getStatus() + ", ");
-				model.addAttribute("replacementCost", mac.getReplacementCost() + ", ");
-				model.addAttribute("storeId", mac.getStoreId() + ", ");
+				model.addAttribute("mId", "ID: " + mac.getmId() + ", ");
+				model.addAttribute("name", "Name: " + mac.getName() + ", ");
+				model.addAttribute("status", "Status: " + mac.getStatus() + ", ");
+				model.addAttribute("replacementCost", "Replacement Cost: " + mac.getReplacementCost() + ", ");
+				model.addAttribute("storeId", "Store ID: " + mac.getStoreId());
 			}
 			return equipment;
 		}

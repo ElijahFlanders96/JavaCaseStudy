@@ -143,7 +143,6 @@
 			<div>
 		      <input type="submit" value="Update Vehicle" class="crud-btn"/>
 		    </div>
-		    <h3 class="main-body-text">${updateCarNoDuplicate}</h3>
 		    <h3 class="main-body-text">${updateCarNoZero}</h3>
 		    <h3 class="main-body-text">${updateCarEmpError}</h3>
 		    <h3 class="main-body-text">${updateCarSessionError}</h3>
