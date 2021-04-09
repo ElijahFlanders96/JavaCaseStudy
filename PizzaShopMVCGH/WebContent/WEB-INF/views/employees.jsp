@@ -179,6 +179,7 @@
 			<div>
 		      <input type="submit" value="Update Employee" class="crud-btn"/>
 		    </div>
+		    <h3 class="main-body-text">${nullEmp}</h3>
 		    <h3 class="main-body-text">${updateEmpNoZero}</h3>
 		    <h3 class="main-body-text">${updateEmpStoreError}</h3>
 		    <h3 class="main-body-text">${updateEmpSessionError}</h3>

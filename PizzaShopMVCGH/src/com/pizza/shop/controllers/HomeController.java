@@ -229,8 +229,6 @@ public class HomeController extends Constants {
 	public String updateEmployee(@ModelAttribute("employee") Employee emp, Model model, BindingResult result, HttpSession session) {
 		Object loggedIn = session.getAttribute("currentUser");
 		int eId = emp.geteId();
-		Employee empOriginal = empService.getEmpService(eId);
-		int sIdOriginal = empOriginal.getStoreId();
 		if (result.hasErrors()) {
 			model.addAttribute("updateEmpError", "There was an error with an input field, please try again");
 			return employees;
@@ -252,6 +250,12 @@ public class HomeController extends Constants {
 				model.addAttribute("updateEmpStoreError", "Please ensure that the Store ID matches the ID of an existing store");
 				return employees;
 			} else {
+				Employee empOriginal = empService.getEmpService(eId);
+				if (empOriginal==null) {
+					model.addAttribute("nullEmp", "Please ensure that the ID matches the ID of an existing employee");
+					return employees;
+				}
+				int sIdOriginal = empOriginal.getStoreId();
 				storeService.removeEmpFromStoreService(eId, sIdOriginal);
 				storeService.addEmpToStoreService(eId, sId);
 				empService.updateEmpService(emp);
@@ -667,8 +671,6 @@ public class HomeController extends Constants {
 		public String updateMac(@ModelAttribute("machinery") Machinery mac, Model model, BindingResult result, HttpSession session) {
 			Object loggedIn = session.getAttribute("currentUser");
 			int mId = mac.getmId();
-			Machinery macOriginal = macService.getMacService(mId);
-			int sIdOriginal = macOriginal.getStoreId();
 			if (result.hasErrors()) {
 				model.addAttribute("updateMacError", "There was an error with an input field, please try again");
 				return equipment;
@@ -693,6 +695,12 @@ public class HomeController extends Constants {
 					model.addAttribute("updateMacStoreError", "Please ensure that the Store ID matches the ID of an existing store");
 					return equipment;
 				} else {
+					Machinery macOriginal = macService.getMacService(mId);
+					if (macOriginal==null) {
+						model.addAttribute("nullMac", "Please ensure that the ID matches the ID of existing equipment");
+						return equipment;
+					}
+					int sIdOriginal = macOriginal.getStoreId();
 					storeService.removeMacFromStoreService(mId, sIdOriginal);
 					storeService.addMacToStoreService(mId, sId);
 					macService.updateMacService(mac);
